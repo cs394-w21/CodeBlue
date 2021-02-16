@@ -21,7 +21,7 @@ const validationSchema = Yup.object().shape({
 });
 
 
-const SignInScreen = () => {
+const SignInScreen = ({navigation}) => {
     // const [signInError, setSignInError] = useState('');
 
     // async function handleOnLogin(values) {
@@ -84,7 +84,7 @@ const SignInScreen = () => {
                 </Form>
             </SafeAreaView>
             <SignUpQuestion/>
-            <ContinueAsGuest/>
+            <ContinueAsGuest navigation={navigation}/>
             </View>
     );
 };
