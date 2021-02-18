@@ -40,16 +40,16 @@ const windowWidth = Dimensions.get("window").width;
 const styles = StyleSheet.create({
     item: {
         backgroundColor: '#e0e0e0',
-        height: '70px',
+        height: 70,
         width: .9*windowWidth,
         justifyContent: 'center',
-        marginTop: '15px'
+        marginTop: 15
     },
     container: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        padding: '10px'
+        padding: 10
     },
     themeBoxes: {
         alignSelf: 'center',

@@ -34,23 +34,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    marginLeft: '30px'
+    marginLeft: 30
   },
   moduleContainer: {
     flexDirection: 'row',
-    marginTop: '30px',
+    marginTop: 30,
     justifyContent: 'flex-start',
     width: .9*windowWidth,
-    padding: '10px'
+    padding: 10
   },
   moduleContainerText: {
     flexDirection: 'column',
-    marginLeft: '80px',
+    marginLeft: 80,
     justifyContent: 'center'
   },
   hardwareComponent: {
-    height: '100px',
-    width: '40px',
+    height: 100,
+    width: 40,
     backgroundColor: 'grey'
   }
 })
