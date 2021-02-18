@@ -5,7 +5,7 @@ import {View, Text, StyleSheet} from 'react-native';
 const WelcomeHeader = () => {
     return (
         <View style={styles.header}>
-            <Text style={styles.text}>Welcome</Text>
+            <Text style={styles.text}>MyBeacon</Text>
         </View>
     );
 };
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         
     },
     header: {
-        backgroundColor: '#4E2A84',
+        backgroundColor: '#21518C',
         height: 200,
         justifyContent: 'center',
         alignItems: 'center',
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     }, 
     text: {
         fontSize : 40,
-        color: 'white'
+        color: 'white',
+        fontFamily: 'monospace'
     }
 })
 

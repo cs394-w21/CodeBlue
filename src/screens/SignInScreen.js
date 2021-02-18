@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import WelcomeHeader from '../components/WelcomeHeader';
 import SignUpQuestion from '../components/SignUpQuestion';
 import ContinueAsGuest from '../components/ContinueAsGuest';
+import firebase from '../firebase';
 
 
 const validationSchema = Yup.object().shape({
@@ -22,38 +23,21 @@ const validationSchema = Yup.object().shape({
 
 
 const SignInScreen = ({navigation}) => {
-    // const [signInError, setSignInError] = useState('');
+    const [signInError, setSignInError] = useState('');
 
-    // async function handleOnLogin(values) {
-    //     const { email, password } = values;
-    //     setSignInError(null);
-    //     try {
-    //       await firebase.auth().signInWithEmailAndPassword(email, password);
-    //       navigation.navigate('ScheduleScreen');
-    //     } catch (error) {
-    //       setSignInError(error.message);
-    //     }
-    // }
-    
-    // async function handleOnSignUp(values) {
-    //     const { name, email, password } = values;
-    //     setSignInError(null);
-    //     try {
-    //       const authCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
-    //       const user = authCredential.user;
-    //       await user.updateProfile({displayName: name});
-    //       navigation.navigate('ScheduleScreen');
-    //     } catch (error) {
-    //       setSignInError(error.message);
-    //     }
-    // }
-    
-    // async function handleOnSubmit(values) {
-    //     return values.confirmPassword ? handleOnSignUp(values) : handleOnLogin(values);
-    // }
+    async function handleOnSignIn(values) {
+        const { email, password } = values;
+        setSignInError(null);
+        try {
+          await firebase.auth().signInWithEmailAndPassword(email, password);
+          navigation.navigate('HomeScreen');
+        } catch (error) {
+          setSignInError(error.message);
+        }
+    }
 
     return (
-        <View>
+        <SafeAreaView>
             <WelcomeHeader/>
             <SafeAreaView style={styles.form}>
                 <Form
@@ -62,6 +46,7 @@ const SignInScreen = ({navigation}) => {
                     password: '',
                     }}
                     validationSchema={validationSchema}
+                    onSubmit={handleOnSignIn}
                 >
                     <Form.Field
                         name="email"
@@ -81,11 +66,12 @@ const SignInScreen = ({navigation}) => {
                         textContentType="password"
                     />
                     <Form.Button title='Sign In'/>
+                    {<Form.ErrorMessage error={signInError} visible={true}/>}
                 </Form>
             </SafeAreaView>
-            <SignUpQuestion/>
+            <SignUpQuestion navigation={navigation}/>
             <ContinueAsGuest navigation={navigation}/>
-            </View>
+        </SafeAreaView>
     );
 };
 
@@ -95,9 +81,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignContent: 'center',
         alignSelf: 'center'
-    },
-    container: {
-        alignItems: 'center',
     },
     header: {
         width: '100%',

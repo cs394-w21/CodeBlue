@@ -20,13 +20,13 @@ export default function FormButton({ title, color = 'primary' }) {
 
 const styles = StyleSheet.create({
   button: {
-    marginVertical: 10,
+    marginVertical: 25,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 15,
     width: '50%',
-    backgroundColor: '#4E2A84'
+    backgroundColor: '#21518C'
   },
   buttonText: {
     color: Colors.white,

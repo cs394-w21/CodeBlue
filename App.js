@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import SignUpScreen from './src/screens/SignUpScreen';
 import SignInScreen from './src/screens/SignInScreen';
 import HomeScreen from './src/screens/HomeScreen';
 
@@ -15,8 +15,8 @@ const App = () => {
 
       <Stack.Navigator style={styles.container1}>
         <Stack.Screen name="SignInScreen" component={SignInScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{ title: 'Sign Up' }} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
-
       </Stack.Navigator>
 
     </NavigationContainer>

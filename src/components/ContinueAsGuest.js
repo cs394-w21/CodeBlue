@@ -1,11 +1,14 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 
 const ContinueAsGuest = ({navigation}) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.text} onPress={() => navigation.navigate('HomeScreen')}>Continue as guest</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+                <Text style={styles.text} >Continue as guest</Text>
+            </TouchableOpacity>
+            
         </View>
     );
 };
@@ -17,7 +20,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         flexDirection: 'row',
         alignSelf: 'center',
-        marginTop: '25%'
+        marginTop: '10%'
     }, 
     text: {
         color: '#223fd4',
