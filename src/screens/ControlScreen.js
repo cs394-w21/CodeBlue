@@ -1,30 +1,30 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 
-const ControlScreen = () => {
+const ControlScreen = ({ navigation }) => {
   const modules = [
-    {title: "BEACON", mode: "Emerald of Calmness"},
-    {title: "AROMA", mode: "Disabled"},
-    {title: "AROMA", mode: "Lavender"},
-    {title: "SOUND", mode: "Rain Forest"}
+    { title: "BEACON", mode: "Emerald of Calmness" },
+    { title: "AROMA", mode: "Disabled" },
+    { title: "AROMA", mode: "Lavender" },
+    { title: "SOUND", mode: "Rain Forest" }
   ]
-    return (
-      <View>
-        <View style={styles.container}>
-          {modules.map((module, i) => {
-            return(
-              <View key={i} style={styles.moduleContainer}>
-                <View style={styles.hardwareComponent}/>
-                <View style={styles.moduleContainerText}>
-                  <Text>{module.title}</Text>
-                  <Text>{module.mode}</Text>
-                </View>
+  return (
+    <View>
+      <View style={styles.container}>
+        {modules.map((module, i) => {
+          return (
+            <View key={i} style={styles.moduleContainer}>
+              <View style={styles.hardwareComponent} />
+              <View style={styles.moduleContainerText}>
+                <Text>{module.title}</Text>
+                <Text>{module.mode}</Text>
               </View>
-            );
-          })}
-        </View>
+            </View>
+          );
+        })}
       </View>
-    )
+    </View>
+  )
 };
 
 const windowWidth = Dimensions.get("window").width;
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 30,
     justifyContent: 'flex-start',
-    width: .9*windowWidth,
+    width: .9 * windowWidth,
     padding: 10
   },
   moduleContainerText: {
