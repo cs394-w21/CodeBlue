@@ -3,10 +3,10 @@ import { ScrollView } from 'react-native';
 import { Text } from 'react-native';
 
 
-const ControlScreen = () => {
+const GuidedMeditationScreen = () => {
     return (
-        <Text> Control</Text>
+        <Text> Guided Meditation</Text>
     )
 };
 
-export default ControlScreen;
+export default GuidedMeditationScreen;

@@ -1,7 +1,18 @@
-import React, {useState} from 'react';
-import {View, ScrollView, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import SwitchToggle from "react-native-switch-toggle";
 import { FontAwesome } from "@expo/vector-icons";
+import ThemeScreen from './ThemeScreen';
+import ControlScreen from './ControlScreen';
+import GuidedMeditationScreen from './GuidedMeditationScreen';
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { enableScreens } from "react-native-screens";
+import { Entypo } from "@expo/vector-icons";
+
+
+const Tab = createBottomTabNavigator();
+enableScreens();
 
 const HomeScreen = () => {
   const [BeaconStatus, setBeaconStatus] = useState(true);
@@ -12,57 +23,43 @@ const HomeScreen = () => {
   }
 
   return (
-    <ScrollView>
-    <View style={styles.container}>
-    <FontAwesome name="circle" size={24} color={BeaconStatus ? 'green' : 'red'} style={styles.circle}/>
-    <View style={styles.filler}/>
-    <SwitchToggle
-      switchOn={switchOn}
-      onPress={onSwitchPress}
-      containerStyle={{
-        marginTop: 16,
-          width: 108,
-          height: 48,
-          borderRadius: 25,
-          backgroundColor: "#ccc",
-          padding: 5
-      }}
-      circleStyle={{
-        width: 38,
-          height: 38,
-          borderRadius: 19,
-          backgroundColor: "white" // rgb(102,134,205)
-      }}
-      //   switchOn={this.state.switchOn2}
-      //   onPress={this.onPress2}
-      circleColorOff="#e7e7e7"
-      circleColorOn="#8cd653"
-      duration={500}
-      style={styles.toggleSwitch}
-    />
-    </View>
-    </ScrollView>
+    <Tab.Navigator
+      tabBarOptions={{ showIcon: true }}
+      initialRouteName="ThemeScreen"
+    >
+      <Tab.Screen
+        name="ThemeScreen"
+        component={ThemeScreen}
+        options={{
+          title: "Themes",
+          tabBarIcon: () => (
+            <Entypo name="images" size={20} color="black" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ControlScreen"
+        component={ControlScreen}
+        options={{
+          title: "Controls",
+          tabBarIcon: () => (
+            <Entypo name="images" size={20} color="black" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="GuidedMeditationScreen"
+        component={GuidedMeditationScreen}
+        options={{
+          title: "Guided Meditation",
+          tabBarIcon: () => (
+            <Entypo name="images" size={20} color="black" />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
-
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  circle: {
-    alignSelf: 'flex-end',
-    margin: '10px',
-  },
-  filler: {
-    flexGrow: 1
-  },
-  toggleSwitch: {
-    alignSelf: 'center'
-  }
-});
 
 export default HomeScreen;
