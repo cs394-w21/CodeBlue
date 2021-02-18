@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, View, FlatList, StyleSheet } from 'react-native';
+import { ScrollView, Text, View, FlatList, StyleSheet, Dimensions } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
@@ -9,7 +9,9 @@ const ThemeScreen = () => {
         [{ title: "stressed" },
         { title: "tired" },
         { title: "romantic" },
-        { title: "chill" }];
+        { title: "chill" },
+        { title: "melancholic" },
+        { title: "energetic" }];
     const Item = ({ title }) => (
         <TouchableOpacity style={styles.item}>
             <Text >{title}</Text>
@@ -19,26 +21,39 @@ const ThemeScreen = () => {
         <Item title={item.title} />
     );
     return (
-        < View>
+        <View style={styles.container}>
             <Text>Hi {userName},</Text>
             <Text>how are you feeling?</Text>
-            <FlatList
-                data={themeList}
-                renderItem={renderItem}
-                keyExtractor={item => item.title}
-            />
+            <View style={styles.themeBoxes}>
+              <FlatList
+                  data={themeList}
+                  renderItem={renderItem}
+                  keyExtractor={item => item.title}
+              />
+            </View>
         </View>
-
     )
-
 };
+
+const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
     item: {
-        height: '100%',
-        backgroundColor: 'grey',
-        height: 50,
-        width: 100
+        backgroundColor: '#e0e0e0',
+        height: '70px',
+        width: .9*windowWidth,
+        justifyContent: 'center',
+        marginTop: '15px'
+    },
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        padding: '10px'
+    },
+    themeBoxes: {
+        alignSelf: 'center',
+        textAlign: 'center',
     }
 })
 
