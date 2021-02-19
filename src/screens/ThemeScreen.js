@@ -2,9 +2,19 @@ import React from 'react';
 import { ScrollView, SafeAreaView, Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import 'react-native-gesture-handler';
 import SettingsButton from '../components/SettingsButton';
+import {useFonts, Raleway_600SemiBold} from '@expo-google-fonts/raleway';
+
+
+let font = 'sans-serif';
 
 
 const ThemeScreen = ({ navigation }) => {
+    const [fontsLoaded] = useFonts({
+    Raleway_600SemiBold
+  });
+  if (fontsLoaded) {
+    font = 'Raleway_600SemiBold'
+  }
     const userName = 'Ana';
     const themeList =
         [{ title: "energetic" },
@@ -30,6 +40,7 @@ const ThemeScreen = ({ navigation }) => {
       <View>
         <SettingsButton navigation={navigation} />
         <SafeAreaView style={styles.container}>
+            <Text style={styles.logo}>MyBeacon</Text>
             <Text style={styles.textStyle}>Hi {userName},</Text>
             <Text style={styles.textBold}>how are you feeling?</Text>
             <View style={styles.themeBoxes}>
@@ -42,6 +53,7 @@ const ThemeScreen = ({ navigation }) => {
         </SafeAreaView>
       </View>
     )
+
 };
 
 const windowWidth = Dimensions.get("window").width;
@@ -83,7 +95,13 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: "bold",
         fontSize: 22
-    }
+    },
+    logo: {
+        fontFamily: font,
+        fontSize: '2.3em',
+        color: '#21518c'
+    },
 })
+
 
 export default ThemeScreen;
