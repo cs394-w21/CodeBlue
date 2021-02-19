@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         padding: 10,
-        margin: "10px"
+        margin: 10
     },
     themeBoxes: {
         alignSelf: 'center',
@@ -65,19 +65,20 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontFamily: "Avenir",
-        fontSize: 20
+        fontSize: 20,
+        fontWeight: "500",
     },
     textBold: {
         fontFamily: "Avenir",
         color: '#21518C',
-        fontWeight: "bolder",
+        fontWeight: "900",
         fontSize: 25
     },
     buttonText: {
         fontFamily: "Avenir",
         color: 'white',
         fontWeight: "bold",
-        fontSize: 20
+        fontSize: 22
     }
 })
 
