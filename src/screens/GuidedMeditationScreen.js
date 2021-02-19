@@ -1,11 +1,15 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
+import SettingsButton from '../components/SettingsButton';
 
 
-const GuidedMeditationScreen = () => {
+
+const GuidedMeditationScreen = ({navigation}) => {
     return (
-        <Text> Guided Meditation</Text>
+        <View>
+          <SettingsButton navigation={navigation} />
+          <Text>Guided Meditation</Text>
+        </View>
     )
 };
 
