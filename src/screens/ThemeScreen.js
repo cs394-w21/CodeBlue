@@ -15,7 +15,7 @@ const ThemeScreen = ({ navigation }) => {
     if (fontsLoaded) {
         font = 'Raleway_800ExtraBold'
     }
-    const userName = 'Ana';
+    const userName = 'Anna';
     const themeList =
         [{ title: "energetic" },
         { title: "chill" },
@@ -40,7 +40,7 @@ const ThemeScreen = ({ navigation }) => {
         <View>
             <SettingsButton navigation={navigation} />
             <SafeAreaView style={styles.container}>
-                <Text style={styles.logo}>MyBeacon</Text>
+                <Text style={styles.logo}>mybeacon</Text>
                 <Text style={styles.textStyle}>Hi {userName},</Text>
                 <Text style={styles.textBold}>how are you feeling?</Text>
                 <View style={styles.themeBoxes}>
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
         fontFamily: "Avenir",
         fontSize: 20,
         fontWeight: "500",
+        color: 'grey'
     },
     textBold: {
         fontFamily: "Avenir",

@@ -1,11 +1,19 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { useFonts, Raleway_800ExtraBold } from '@expo-google-fonts/raleway';
 
+let font = 'sans-serif';
 
 const WelcomeHeader = () => {
+    const [fontsLoaded] = useFonts({
+        Raleway_800ExtraBold
+    });
+    if (fontsLoaded) {
+        font = 'Raleway_800ExtraBold'
+    }
     return (
         <View style={styles.header}>
-            <Text style={styles.text}>MyBeacon</Text>
+            <Text style={styles.text}>mybeacon</Text>
         </View>
     );
 };
@@ -15,7 +23,7 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         width: '100%'
-        
+
     },
     header: {
         backgroundColor: '#21518C',
@@ -23,11 +31,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 50
-    }, 
+    },
     text: {
-        fontSize : 40,
+        fontSize: 40,
         color: 'white',
-        fontFamily: 'monospace'
+        fontFamily: 'Raleway_800ExtraBold',
     }
 })
 
