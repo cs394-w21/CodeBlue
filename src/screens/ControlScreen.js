@@ -1,25 +1,28 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import SettingsButton from '../components/SettingsButton';
 
-const ControlScreen = ({ navigation }) => {
+
+const ControlScreen = ({navigation}) => {
   const modules = [
     { title: "BEACON", mode: "Emerald of Calmness" },
     { title: "AROMA", mode: "Disabled" },
     { title: "AROMA", mode: "Lavender" },
     { title: "SOUND", mode: "Rain Forest" }
   ]
-  return (
-    <View>
-      <View style={styles.container}>
-        {modules.map((module, i) => {
-          return (
-            <View key={i} style={styles.moduleContainer}>
-              <View style={styles.hardwareComponent} />
-              <View style={styles.moduleContainerText}>
-                <Text>{module.title}</Text>
-                <Text>{module.mode}</Text>
+    return (
+      <View>
+        <SettingsButton navigation={navigation} />
+        <View style={styles.container}>
+          {modules.map((module, i) => {
+            return(
+              <View key={i} style={styles.moduleContainer}>
+                <View style={styles.hardwareComponent}/>
+                <View style={styles.moduleContainerText}>
+                  <Text>{module.title}</Text>
+                  <Text>{module.mode}</Text>
+                </View>
               </View>
-            </View>
           );
         })}
       </View>

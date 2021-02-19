@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, SafeAreaView, Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import 'react-native-gesture-handler';
+import SettingsButton from '../components/SettingsButton';
 
 
 const ThemeScreen = ({ navigation }) => {
@@ -26,6 +27,8 @@ const ThemeScreen = ({ navigation }) => {
         <Item title={item.title} />
     );
     return (
+      <View>
+        <SettingsButton navigation={navigation} />
         <SafeAreaView style={styles.container}>
             <Text style={styles.textStyle}>Hi {userName},</Text>
             <Text style={styles.textBold}>how are you feeling?</Text>
@@ -37,6 +40,7 @@ const ThemeScreen = ({ navigation }) => {
                 />
             </View>
         </SafeAreaView>
+      </View>
     )
 };
 
