@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, SafeAreaView, Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import 'react-native-gesture-handler';
 import SettingsButton from '../components/SettingsButton';
-import {useFonts, Raleway_600SemiBold} from '@expo-google-fonts/raleway';
+import { useFonts, Raleway_800ExtraBold } from '@expo-google-fonts/raleway';
 
 
 let font = 'sans-serif';
@@ -10,11 +10,11 @@ let font = 'sans-serif';
 
 const ThemeScreen = ({ navigation }) => {
     const [fontsLoaded] = useFonts({
-    Raleway_600SemiBold
-  });
-  if (fontsLoaded) {
-    font = 'Raleway_600SemiBold'
-  }
+        Raleway_800ExtraBold
+    });
+    if (fontsLoaded) {
+        font = 'Raleway_800ExtraBold'
+    }
     const userName = 'Ana';
     const themeList =
         [{ title: "energetic" },
@@ -37,21 +37,21 @@ const ThemeScreen = ({ navigation }) => {
         <Item title={item.title} />
     );
     return (
-      <View>
-        <SettingsButton navigation={navigation} />
-        <SafeAreaView style={styles.container}>
-            <Text style={styles.logo}>MyBeacon</Text>
-            <Text style={styles.textStyle}>Hi {userName},</Text>
-            <Text style={styles.textBold}>how are you feeling?</Text>
-            <View style={styles.themeBoxes}>
-                <FlatList
-                    data={themeList}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.title}
-                />
-            </View>
-        </SafeAreaView>
-      </View>
+        <View>
+            <SettingsButton navigation={navigation} />
+            <SafeAreaView style={styles.container}>
+                <Text style={styles.logo}>MyBeacon</Text>
+                <Text style={styles.textStyle}>Hi {userName},</Text>
+                <Text style={styles.textBold}>how are you feeling?</Text>
+                <View style={styles.themeBoxes}>
+                    <FlatList
+                        data={themeList}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.title}
+                    />
+                </View>
+            </SafeAreaView>
+        </View>
     )
 
 };
@@ -97,9 +97,10 @@ const styles = StyleSheet.create({
         fontSize: 22
     },
     logo: {
-        fontFamily: font,
+        fontFamily: 'Raleway_800ExtraBold',
         fontSize: '2.3em',
-        color: '#21518c'
+        color: '#21518c',
+        marginBottom: 20
     },
 })
 
