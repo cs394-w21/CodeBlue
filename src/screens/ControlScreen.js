@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import SettingsButton from '../components/SettingsButton';
 
-const ControlScreen = () => {
+
+const ControlScreen = ({navigation}) => {
   const modules = [
     {title: "BEACON", mode: "Emerald of Calmness"},
     {title: "AROMA", mode: "Disabled"},
@@ -10,6 +12,7 @@ const ControlScreen = () => {
   ]
     return (
       <View>
+        <SettingsButton navigation={navigation} />
         <View style={styles.container}>
           {modules.map((module, i) => {
             return(

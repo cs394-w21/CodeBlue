@@ -1,9 +1,10 @@
 import React from 'react';
 import { ScrollView, Text, View, FlatList, StyleSheet, Dimensions } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import SettingsButton from '../components/SettingsButton';
 
 
-const ThemeScreen = () => {
+const ThemeScreen = ({navigation}) => {
     const userName = 'Ana';
     const themeList =
         [{ title: "stressed" },
@@ -21,6 +22,8 @@ const ThemeScreen = () => {
         <Item title={item.title} />
     );
     return (
+      <View>
+        <SettingsButton navigation={navigation} />
         <View style={styles.container}>
             <Text>Hi {userName},</Text>
             <Text>how are you feeling?</Text>
@@ -32,6 +35,7 @@ const ThemeScreen = () => {
               />
             </View>
         </View>
+      </View>
     )
 };
 

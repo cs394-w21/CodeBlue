@@ -14,7 +14,7 @@ import { Entypo } from "@expo/vector-icons";
 const Tab = createBottomTabNavigator();
 enableScreens();
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [BeaconStatus, setBeaconStatus] = useState(true);
   const [switchOn, setSwitchOn] = useState(true);
 
@@ -29,7 +29,7 @@ const HomeScreen = () => {
     >
       <Tab.Screen
         name="ThemeScreen"
-        component={ThemeScreen}
+        children={() => <ThemeScreen navigation={navigation}/>}
         options={{
           title: "Themes",
           tabBarIcon: () => (
@@ -39,7 +39,7 @@ const HomeScreen = () => {
       />
       <Tab.Screen
         name="ControlScreen"
-        component={ControlScreen}
+        children={() => <ControlScreen navigation={navigation}/>}
         options={{
           title: "Controls",
           tabBarIcon: () => (
@@ -49,7 +49,7 @@ const HomeScreen = () => {
       />
       <Tab.Screen
         name="GuidedMeditationScreen"
-        component={GuidedMeditationScreen}
+        children={() => <GuidedMeditationScreen navigation={navigation}/>}
         options={{
           title: "Guided Meditation",
           tabBarIcon: () => (
