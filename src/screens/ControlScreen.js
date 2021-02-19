@@ -5,10 +5,10 @@ import SettingsButton from '../components/SettingsButton';
 
 const ControlScreen = ({navigation}) => {
   const modules = [
-    {title: "BEACON", mode: "Emerald of Calmness"},
-    {title: "AROMA", mode: "Disabled"},
-    {title: "AROMA", mode: "Lavender"},
-    {title: "SOUND", mode: "Rain Forest"}
+    { title: "BEACON", mode: "Emerald of Calmness" },
+    { title: "AROMA", mode: "Disabled" },
+    { title: "AROMA", mode: "Lavender" },
+    { title: "SOUND", mode: "Rain Forest" }
   ]
     return (
       <View>
@@ -23,11 +23,11 @@ const ControlScreen = ({navigation}) => {
                   <Text>{module.mode}</Text>
                 </View>
               </View>
-            );
-          })}
-        </View>
+          );
+        })}
       </View>
-    )
+    </View>
+  )
 };
 
 const windowWidth = Dimensions.get("window").width;
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 30,
     justifyContent: 'flex-start',
-    width: .9*windowWidth,
+    width: .9 * windowWidth,
     padding: 10
   },
   moduleContainerText: {
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   hardwareComponent: {
     height: 100,
     width: 40,
-    backgroundColor: 'grey'
+    backgroundColor: '#21518C'
   }
 })
 

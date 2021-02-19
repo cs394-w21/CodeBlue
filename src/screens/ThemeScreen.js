@@ -1,21 +1,26 @@
 import React from 'react';
-import { ScrollView, Text, View, FlatList, StyleSheet, Dimensions } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, SafeAreaView, Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import 'react-native-gesture-handler';
 import SettingsButton from '../components/SettingsButton';
 
 
-const ThemeScreen = ({navigation}) => {
+const ThemeScreen = ({ navigation }) => {
     const userName = 'Ana';
     const themeList =
-        [{ title: "stressed" },
-        { title: "tired" },
-        { title: "romantic" },
+        [{ title: "energetic" },
         { title: "chill" },
         { title: "melancholic" },
-        { title: "energetic" }];
+        { title: "stressed" },
+        { title: "tired" },
+        { title: "romantic" }];
+    const handlePress = () => {
+        navigation.navigate('ControlScreen');
+    }
     const Item = ({ title }) => (
-        <TouchableOpacity style={styles.item}>
-            <Text >{title}</Text>
+        <TouchableOpacity
+            onPress={handlePress}
+            style={styles.item}>
+            <Text style={styles.buttonText}>{title}</Text>
         </TouchableOpacity>
     );
     const renderItem = ({ item }) => (
@@ -24,17 +29,17 @@ const ThemeScreen = ({navigation}) => {
     return (
       <View>
         <SettingsButton navigation={navigation} />
-        <View style={styles.container}>
-            <Text>Hi {userName},</Text>
-            <Text>how are you feeling?</Text>
+        <SafeAreaView style={styles.container}>
+            <Text style={styles.textStyle}>Hi {userName},</Text>
+            <Text style={styles.textBold}>how are you feeling?</Text>
             <View style={styles.themeBoxes}>
-              <FlatList
-                  data={themeList}
-                  renderItem={renderItem}
-                  keyExtractor={item => item.title}
-              />
+                <FlatList
+                    data={themeList}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.title}
+                />
             </View>
-        </View>
+        </SafeAreaView>
       </View>
     )
 };
@@ -43,21 +48,41 @@ const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
     item: {
-        backgroundColor: '#e0e0e0',
+        backgroundColor: '#21518C',
         height: 70,
-        width: .9*windowWidth,
+        width: .8 * windowWidth,
         justifyContent: 'center',
-        marginTop: 15
+        marginTop: 15,
+        borderRadius: 10,
+
     },
     container: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        padding: 10
+        padding: 10,
+        margin: 10
     },
     themeBoxes: {
         alignSelf: 'center',
         textAlign: 'center',
+    },
+    textStyle: {
+        fontFamily: "Avenir",
+        fontSize: 20,
+        fontWeight: "500",
+    },
+    textBold: {
+        fontFamily: "Avenir",
+        color: '#21518C',
+        fontWeight: "900",
+        fontSize: 25
+    },
+    buttonText: {
+        fontFamily: "Avenir",
+        color: 'white',
+        fontWeight: "bold",
+        fontSize: 22
     }
 })
 
