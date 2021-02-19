@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   hardwareComponent: {
     height: 100,
     width: 40,
-    backgroundColor: 'grey'
+    backgroundColor: '#21518C'
   }
 })
 

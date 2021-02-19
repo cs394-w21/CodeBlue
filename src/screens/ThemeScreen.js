@@ -1,6 +1,6 @@
 import React from 'react';
-import { ScrollView, SafeAreaView, Text, View, FlatList, StyleSheet, Dimensions } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, SafeAreaView, Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import 'react-native-gesture-handler';
 
 
 const ThemeScreen = ({ navigation }) => {
@@ -13,7 +13,7 @@ const ThemeScreen = ({ navigation }) => {
         { title: "tired" },
         { title: "romantic" }];
     const handlePress = () => {
-        console.log('test')
+        navigation.navigate('ControlScreen');
     }
     const Item = ({ title }) => (
         <TouchableOpacity
