@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 40,
         color: 'white',
-        fontFamily: 'Raleway_800ExtraBold',
+        // fontFamily: 'Raleway_800ExtraBold',
     }
 })
 

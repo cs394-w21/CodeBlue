@@ -25,10 +25,10 @@ const SettingsScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
     homeButton: {
-        height: '20px',
+        height: 20,
         alignItems: 'flex-end',
-        marginTop: '5px',
-        marginRight: '5px'
+        marginTop: 5,
+        marginRight: 5
     },
     text: {
         justifyContent: 'center',

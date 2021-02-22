@@ -6,6 +6,7 @@ import {useFonts, Raleway_800ExtraBold} from '@expo-google-fonts/raleway';
 
 import CreateThemeScreen from './CreateThemeScreen';
 import firebase from '../firebase';
+import UserContext from '../../UserContext';
 
 
 let font = 'sans-serif';
@@ -13,19 +14,13 @@ let font = 'sans-serif';
 const db = firebase.database().ref();
 
 const ThemeScreen = ({navigation}) => {
-  const user = createContext();
+  const user = useContext(UserContext);
   const [fontsLoaded] = useFonts({
     Raleway_800ExtraBold
   });
   if (fontsLoaded) {
     font = 'Raleway_800ExtraBold'
   }
-  const themeList =
-    [{title: "energetic", color: "red"},
-    {title: "chill", color: "blue"},
-    {title: "elegant", color: "green"},
-    {title: "confident", color: "purple"},
-    {title: "romantic", color: "pink"}];
   const handlePress = () => {
     navigation.navigate('ControlScreen');
   }
@@ -52,7 +47,7 @@ const ThemeScreen = ({navigation}) => {
         <Text style={styles.textBold}>how would you like to feel?</Text>
         <View style={styles.themeBoxes}>
           <FlatList
-            data={themeList}
+            data={user.themeList}
             renderItem={renderItem}
             keyExtractor={item => item.title}
           />
@@ -109,7 +104,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     fontFamily: 'Raleway_800ExtraBold',
-    fontSize: '2.3em',
+    fontSize: 15,
     color: '#21518c',
     marginBottom: 20
   },

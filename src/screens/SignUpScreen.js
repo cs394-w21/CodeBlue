@@ -24,13 +24,25 @@ const validationSchema = Yup.object().shape({
 const SignUpScreen = ({navigation}) => {
   const [signInError, setSignInError] = useState('');
 
+  const themeList =
+    [{title: "energetic", color: "red"},
+    {title: "chill", color: "blue"},
+    {title: "elegant", color: "green"},
+    {title: "confident", color: "purple"},
+    {title: "romantic", color: "pink"}];
+
+  const [themes, setThemes] = useState({themeList});
+
   async function handleOnSignUp(values) {
+    
     const {name, email, password} = values;
     setSignInError(null);
     try {
       const authCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
       const user = authCredential.user;
       await user.updateProfile({displayName: name});
+      const db = firebase.database().ref(`users/${user.uid}/`);
+      db.set(themes);
       navigation.navigate('HomeScreen');
     } catch (error) {
       setSignInError(error.message);

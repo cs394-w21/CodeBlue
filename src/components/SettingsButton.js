@@ -21,10 +21,10 @@ const SettingsButton = ({navigation}) => {
 
 const styles = StyleSheet.create({
     settings: {
-        height: '20px',
+        height: 20,
         alignItems: 'flex-end',
-        marginTop: '5px',
-        marginRight: '5px'
+        marginTop: 5,
+        marginRight: 5
     }
 })
 
