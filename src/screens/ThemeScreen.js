@@ -1,4 +1,4 @@
-import React, {createContext, useContext} from 'react';
+import React, {createContext, useContext, useState, useEffect} from 'react';
 import {ScrollView, SafeAreaView, Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
 import 'react-native-gesture-handler';
 import SettingsButton from '../components/SettingsButton';
@@ -13,11 +13,23 @@ let font = 'sans-serif';
 
 const db = firebase.database().ref();
 
+
 const ThemeScreen = ({navigation}) => {
   const user = useContext(UserContext);
   const [fontsLoaded] = useFonts({
     Raleway_800ExtraBold
   });
+
+  const [windowWidth, setWindowWitdth] = useState(Dimensions.get("window").width);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWitdth(Dimensions.get("window").width);
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
 
   const themeList =
@@ -39,7 +51,7 @@ const ThemeScreen = ({navigation}) => {
   const Item = ({title, color}) => (
     <TouchableOpacity
       onPress={handlePress}
-      style={[styles.item, {backgroundColor: `${color}`}]}
+      style={[styles.item, {backgroundColor: `${color}`, width: windowWidth*0.8}]}
     >
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity >
@@ -70,13 +82,10 @@ const ThemeScreen = ({navigation}) => {
 
 };
 
-const windowWidth = Dimensions.get("window").width;
-
 const styles = StyleSheet.create({
   item: {
     //backgroundColor: '#21518C',
     height: 70,
-    width: .8 * windowWidth,
     justifyContent: 'center',
     marginTop: 15,
     borderRadius: 10,
