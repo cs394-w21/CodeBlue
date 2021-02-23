@@ -18,6 +18,15 @@ const ThemeScreen = ({navigation}) => {
   const [fontsLoaded] = useFonts({
     Raleway_800ExtraBold
   });
+
+
+  const themeList =
+    [{title: "energetic", color: "red"},
+    {title: "chill", color: "deepskyblue"},
+    {title: "elegant", color: "green"},
+    {title: "confident", color: "purple"},
+    {title: "romantic", color: "pink"}];
+
   if (fontsLoaded) {
     font = 'Raleway_800ExtraBold'
   }
@@ -43,11 +52,11 @@ const ThemeScreen = ({navigation}) => {
       <SettingsButton navigation={navigation} />
       <SafeAreaView style={styles.container}>
         <Text style={styles.logo}>mybeacon</Text>
-        <Text style={styles.textStyle}>Hi {user.name},</Text>
+        <Text style={styles.textStyle}>Hi {user?user.name:'there'},</Text>
         <Text style={styles.textBold}>how would you like to feel?</Text>
         <View style={styles.themeBoxes}>
           <FlatList
-            data={user.themeList}
+            data={user?user.themeList:themeList}
             renderItem={renderItem}
             keyExtractor={item => item.title}
           />
