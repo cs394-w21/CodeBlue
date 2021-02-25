@@ -1,29 +1,32 @@
 import React from 'react';
-import {TouchableOpacity, View, Text, StyleSheet, Dimensions} from 'react-native';
-import {Entypo} from "@expo/vector-icons";
+import { TouchableOpacity, View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Entypo } from "@expo/vector-icons";
 import Logo from '../components/Logo';
 
-const ControlScreen = ({navigation}) => {
+const ControlScreen = ({ navigation }) => {
   const modules = [
-    {title: "AROMA", mode: "Disabled"},
-    {title: "AROMA", mode: "Lavender"},
-    {title: "SOUND", mode: "Rain Forest"}
+    { title: "AROMA", mode: "Disabled" },
+    { title: "AROMA", mode: "Lavender" },
+    { title: "SOUND", mode: "Rain Forest" }
   ];
   return (
     <View style={styles.mainContainer}>
       <TouchableOpacity
+        style={styles.homeButton}
         onPress={() =>
           navigation.navigate('HomeScreen')}>
         <Entypo
           name="home"
-          size={20}
+          size={30}
           color="black" />
       </TouchableOpacity>
       <Logo />
       <Text style={styles.topText}>Tap on a module to adjust it</Text>
       <View style={styles.container}>
         <View style={styles.moduleContainer}>
-          <View style={styles.topHardwareComponent}/>
+          <View style={styles.topHardwareComponent} />
+          <View style={styles.lineTop} />
+          <View style={styles.topCircle} />
           <View style={styles.moduleContainerText}>
             <Text>BEACON</Text>
             <Text>Emerald of Calmness</Text>
@@ -33,6 +36,8 @@ const ControlScreen = ({navigation}) => {
           return (
             <View key={i} style={styles.moduleContainer}>
               <View style={styles.hardwareComponent} />
+              <View style={styles.line} />
+              <View style={styles.circle} />
               <View style={styles.moduleContainerText}>
                 <Text>{module.title}</Text>
                 <Text>{module.mode}</Text>
@@ -50,12 +55,52 @@ const ControlScreen = ({navigation}) => {
 const windowWidth = Dimensions.get("window").width;
 // put this in a constant ^^
 
+const boxHeight = 60;
+const smallBoxHeight = 35;
+
 const styles = StyleSheet.create({
+  homeButton: {
+    alignItems: 'flex-end',
+  },
+  circle: {
+    borderRadius: "50%",
+    backgroundColor: "red",
+    width: 5,
+    height: 5,
+    marginTop: boxHeight * .5 - 3
+  },
+  topCircle: {
+    borderRadius: "50%",
+    backgroundColor: "red",
+    width: 5,
+    height: 5,
+    marginTop: smallBoxHeight * .5 - 3
+  },
+  line: {
+    borderBottomColor: "Black",
+    borderBottomWidth: 1,
+    width: 100,
+    height: boxHeight * .5,
+    marginLeft: -15,
+    marginRight: 0,
+    paddingRight: 0,
+  },
+  lineTop: {
+    borderBottomColor: "Black",
+    borderBottomWidth: 1,
+    width: 100,
+    height: smallBoxHeight * .5,
+    marginLeft: -15,
+    marginRight: 0,
+    paddingRight: 0,
+  },
   mainContainer: {
     padding: 10
   },
   topText: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    color: "grey"
+
   },
   container: {
     flex: 1,
@@ -72,16 +117,16 @@ const styles = StyleSheet.create({
   },
   moduleContainerText: {
     flexDirection: 'column',
-    marginLeft: 80,
+    marginLeft: 10,
     justifyContent: 'center'
   },
   hardwareComponent: {
-    height: 60,
+    height: boxHeight,
     width: 40,
     backgroundColor: '#21518C'
   },
   topHardwareComponent: {
-    height: 35,
+    height: smallBoxHeight,
     width: 40,
     backgroundColor: '#21518C'
   },

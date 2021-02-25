@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import {MaterialCommunityIcons} from '@expo/vector-icons';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import ControlScreen from '../screens/ControlScreen';
 
 
-const BeaconButton = ({navigation}) => {
+const BeaconButton = ({ navigation }) => {
   return (
     <View style={styles.settings}>
       <TouchableOpacity
@@ -13,7 +13,7 @@ const BeaconButton = ({navigation}) => {
           navigation.navigate('ControlScreen')}>
         <MaterialCommunityIcons
           name="lighthouse"
-          size={24}
+          size={40}
           color="black" />
       </TouchableOpacity>
     </View>
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     height: 20,
     alignItems: 'flex-end',
     marginTop: 5,
-    marginRight: 5
+    marginRight: 5,
+    padding: 10
   }
 })
 
