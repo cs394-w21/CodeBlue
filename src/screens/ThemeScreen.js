@@ -7,6 +7,7 @@ import {useFonts, Raleway_800ExtraBold} from '@expo-google-fonts/raleway';
 import CreateThemeScreen from './CreateThemeScreen';
 import firebase from '../firebase';
 import UserContext from '../../UserContext';
+import Logo from '../components/Logo'
 
 let font = 'sans-serif';
 
@@ -61,7 +62,7 @@ const ThemeScreen = ({navigation}) => {
     <View>
       <BeaconButton navigation={navigation} />
       <SafeAreaView style={styles.container}>
-        <Text style={styles.logo}>mybeacon</Text>
+        <Logo />
         <Text style={styles.textStyle}>Hi {user ? user.name : 'there'},</Text>
         <Text style={styles.textBold}>how would you like to feel?</Text>
         <View style={styles.themeBoxes}>
