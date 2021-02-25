@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import Form from '../components/Form';
 import * as Yup from 'yup';
 import firebase from '../firebase';
@@ -21,26 +21,31 @@ const validationSchema = Yup.object().shape({
     .oneOf([Yup.ref('password'), null], 'Confirmation password must match password'),
 });
 
-const SignUpScreen = ({navigation}) => {
+const SignUpScreen = ({ navigation }) => {
   const [signInError, setSignInError] = useState('');
 
   const themeList =
-    [{title: "energetic", color: "red"},
-    {title: "chill", color: "blue"},
-    {title: "elegant", color: "green"},
-    {title: "confident", color: "purple"},
-    {title: "romantic", color: "pink"}];
+    [{ title: "excited", color: "#ce51c6" },
+    { title: "chill", color: "#72b583" },
+    { title: "happy", color: "#eac752" },
+    { title: "focused", color: "#569ac5" },
+    { title: "calm", color: "#72bbe2" },
+    { title: "relaxed", color: "#c59cd6" },
+    { title: "motivated", color: "#64b6b3" },
+    { title: "energized", color: "#e2a862" },
+    { title: "empowered", color: "#9242b7" },
+    { title: "romantic", color: "#da3a7d" }];
 
-  const [themes, setThemes] = useState({themeList});
+  const [themes, setThemes] = useState({ themeList });
 
   async function handleOnSignUp(values) {
-    
-    const {name, email, password} = values;
+
+    const { name, email, password } = values;
     setSignInError(null);
     try {
       const authCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
       const user = authCredential.user;
-      await user.updateProfile({displayName: name});
+      await user.updateProfile({ displayName: name });
       const db = firebase.database().ref(`users/${user.uid}/`);
       db.set(themes);
       navigation.navigate('HomeScreen');
