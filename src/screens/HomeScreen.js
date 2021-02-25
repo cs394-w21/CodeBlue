@@ -10,7 +10,7 @@ import {Entypo} from "@expo/vector-icons";
 
 import ThemeScreen from './ThemeScreen';
 import ControlScreen from './ControlScreen';
-import GuidedMeditationScreen from './GuidedMeditationScreen';
+import JournalScreen from './JournalScreen';
 
 const Tab = createBottomTabNavigator();
 enableScreens();
@@ -40,22 +40,11 @@ const HomeScreen = ({navigation}) => {
         })}
       />
       <Tab.Screen
-        name="ControlScreen"
+        name="JournalScreen"
         //children={() => <ControlScreen navigation={navigation}/>}
-        component={ControlScreen}
+        component={JournalScreen}
         options={({navigation}) => ({
-          title: "Controls",
-          tabBarIcon: () => (
-            <Entypo name="images" size={20} color="black" />
-          ),
-        })}
-      />
-      <Tab.Screen
-        name="GuidedMeditationScreen"
-        //children={() => <GuidedMeditationScreen navigation={navigation}/>}
-        component={GuidedMeditationScreen}
-        options={({navigation}) => ({
-          title: "Guided Meditation",
+          title: "Journal",
           tabBarIcon: () => (
             <Entypo name="images" size={20} color="black" />
           ),

@@ -10,6 +10,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import firebase from './src/firebase';
 import UserContext from './UserContext';
+import ControlScreen from './src/screens/ControlScreen';
 
 const Stack = createStackNavigator();
 
@@ -51,6 +52,7 @@ const App = () => {
           <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{title: 'Sign Up'}} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} options={({navigation}) => ({headerShown: false})} />
           <Stack.Screen name="SettingsScreen" component={SettingsScreen} options={{headerShown: false}} />
+          <Stack.Screen name="ControlScreen" component={ControlScreen} options={{headerShown: false}} />
         </Stack.Navigator>
 
       </NavigationContainer>

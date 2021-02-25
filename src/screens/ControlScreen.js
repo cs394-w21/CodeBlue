@@ -1,33 +1,39 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import SettingsButton from '../components/SettingsButton';
-
+import {TouchableOpacity, View, Text, StyleSheet, Dimensions} from 'react-native';
+import {Entypo} from "@expo/vector-icons";
 
 const ControlScreen = ({navigation}) => {
   const modules = [
-    { title: "BEACON", mode: "Emerald of Calmness" },
-    { title: "AROMA", mode: "Disabled" },
-    { title: "AROMA", mode: "Lavender" },
-    { title: "SOUND", mode: "Rain Forest" }
-  ]
-    return (
-      <View>
-        <SettingsButton navigation={navigation} />
-        <View style={styles.container}>
-          {modules.map((module, i) => {
-            return(
-              <View key={i} style={styles.moduleContainer}>
-                <View style={styles.hardwareComponent}/>
-                <View style={styles.moduleContainerText}>
-                  <Text>{module.title}</Text>
-                  <Text>{module.mode}</Text>
-                </View>
+    {title: "BEACON", mode: "Emerald of Calmness"},
+    {title: "AROMA", mode: "Disabled"},
+    {title: "AROMA", mode: "Lavender"},
+    {title: "SOUND", mode: "Rain Forest"}
+  ];
+  return (
+    <View>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('HomeScreen')}>
+        <Entypo
+          name="home"
+          size={20}
+          color="black" />
+      </TouchableOpacity>
+      <View style={styles.container}>
+        {modules.map((module, i) => {
+          return (
+            <View key={i} style={styles.moduleContainer}>
+              <View style={styles.hardwareComponent} />
+              <View style={styles.moduleContainerText}>
+                <Text>{module.title}</Text>
+                <Text>{module.mode}</Text>
               </View>
+            </View>
           );
         })}
       </View>
     </View>
-  )
+  );
 };
 
 const windowWidth = Dimensions.get("window").width;
@@ -55,7 +61,13 @@ const styles = StyleSheet.create({
     height: 100,
     width: 40,
     backgroundColor: '#21518C'
-  }
+  },
+  homeButton: {
+    height: 20,
+    alignItems: 'flex-end',
+    marginTop: 5,
+    marginRight: 5
+  },
 })
 
 export default ControlScreen;

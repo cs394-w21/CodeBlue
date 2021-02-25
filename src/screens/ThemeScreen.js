@@ -1,18 +1,16 @@
 import React, {createContext, useContext, useState, useEffect} from 'react';
 import {ScrollView, SafeAreaView, Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
 import 'react-native-gesture-handler';
-import SettingsButton from '../components/SettingsButton';
+import BeaconButton from '../components/BeaconButton';
 import {useFonts, Raleway_800ExtraBold} from '@expo-google-fonts/raleway';
 
 import CreateThemeScreen from './CreateThemeScreen';
 import firebase from '../firebase';
 import UserContext from '../../UserContext';
 
-
 let font = 'sans-serif';
 
 const db = firebase.database().ref();
-
 
 const ThemeScreen = ({navigation}) => {
   const user = useContext(UserContext);
@@ -51,7 +49,7 @@ const ThemeScreen = ({navigation}) => {
   const Item = ({title, color}) => (
     <TouchableOpacity
       onPress={handlePress}
-      style={[styles.item, {backgroundColor: `${color}`, width: windowWidth*0.8}]}
+      style={[styles.item, {backgroundColor: `${color}`, width: windowWidth * 0.45}]}
     >
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity >
@@ -61,14 +59,15 @@ const ThemeScreen = ({navigation}) => {
   );
   return (
     <View>
-      <SettingsButton navigation={navigation} />
+      <BeaconButton navigation={navigation} />
       <SafeAreaView style={styles.container}>
         <Text style={styles.logo}>mybeacon</Text>
-        <Text style={styles.textStyle}>Hi {user?user.name:'there'},</Text>
+        <Text style={styles.textStyle}>Hi {user ? user.name : 'there'},</Text>
         <Text style={styles.textBold}>how would you like to feel?</Text>
         <View style={styles.themeBoxes}>
           <FlatList
-            data={user?user.themeList:themeList}
+            numColumns={2}
+            data={user ? user.themeList : themeList}
             renderItem={renderItem}
             keyExtractor={item => item.title}
           />
@@ -85,11 +84,12 @@ const ThemeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   item: {
     //backgroundColor: '#21518C',
-    height: 70,
+    height: 80,
     justifyContent: 'center',
     marginTop: 15,
-    borderRadius: 10,
-
+    borderRadius: 3,
+    marginLeft: 5,
+    marginRight: 5
   },
   container: {
     flex: 1,
