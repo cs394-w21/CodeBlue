@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { ScrollView, SafeAreaView, Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import React, {createContext, useContext, useState, useEffect} from 'react';
+import {ScrollView, SafeAreaView, Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
 import 'react-native-gesture-handler';
 import BeaconButton from '../components/BeaconButton';
-import { useFonts, Raleway_800ExtraBold } from '@expo-google-fonts/raleway';
+import {useFonts, Raleway_800ExtraBold} from '@expo-google-fonts/raleway';
 
 import CreateThemeScreen from './CreateThemeScreen';
 import firebase from '../firebase';
@@ -13,7 +13,7 @@ let font = 'sans-serif';
 
 const db = firebase.database().ref();
 
-const ThemeScreen = ({ navigation }) => {
+const ThemeScreen = ({navigation}) => {
   const user = useContext(UserContext);
   const [fontsLoaded] = useFonts({
     Raleway_800ExtraBold
@@ -25,25 +25,21 @@ const ThemeScreen = ({ navigation }) => {
     function handleResize() {
       setWindowWitdth(Dimensions.get("window").width);
     }
-
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const themeList =
-    [{ title: "excited", color: "#ce51c6" },
-    { title: "chill", color: "#72b583" },
-    { title: "happy", color: "#eac752" },
-    { title: "focused", color: "#569ac5" },
-    { title: "calm", color: "#72bbe2" },
-    { title: "relaxed", color: "#c59cd6" },
-    { title: "motivated", color: "#64b6b3" },
-    { title: "energized", color: "#e2a862" },
-    { title: "empowered", color: "#9242b7" },
-    { title: "romantic", color: "#da3a7d" }];
-
-
-
+    [{title: "excited", color: "#ce51c6"},
+    {title: "chill", color: "#72b583"},
+    {title: "happy", color: "#eac752"},
+    {title: "focused", color: "#569ac5"},
+    {title: "calm", color: "#72bbe2"},
+    {title: "relaxed", color: "#c59cd6"},
+    {title: "motivated", color: "#64b6b3"},
+    {title: "energized", color: "#e2a862"},
+    {title: "empowered", color: "#9242b7"},
+    {title: "romantic", color: "#da3a7d"}];
 
   if (fontsLoaded) {
     font = 'Raleway_800ExtraBold'
@@ -54,15 +50,15 @@ const ThemeScreen = ({ navigation }) => {
   const createNewTheme = () => {
     navigation.navigate('CreateThemeScreen');
   }
-  const Item = ({ title, color }) => (
+  const Item = ({title, color}) => (
     <TouchableOpacity
       onPress={handlePress}
-      style={[styles.item, { backgroundColor: `${color}`, width: windowWidth * 0.45 }]}
+      style={[styles.item, {backgroundColor: `${color}`, width: windowWidth * 0.45}]}
     >
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity >
   );
-  const renderItem = ({ item }) => (
+  const renderItem = ({item}) => (
     <Item title={item.title} color={item.color} />
   );
   return (
@@ -129,7 +125,7 @@ const styles = StyleSheet.create({
     fontSize: 22
   },
   logo: {
-    fontFamily: 'Raleway_800ExtraBold',
+    fontFamily: font,
     fontSize: 15,
     color: '#21518c',
     marginBottom: 20

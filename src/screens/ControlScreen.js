@@ -1,14 +1,21 @@
-import React from 'react';
-import { TouchableOpacity, View, Text, StyleSheet, Dimensions } from 'react-native';
-import { Entypo } from "@expo/vector-icons";
+import React, {useState} from 'react';
+import {Picker, Switch, TouchableOpacity, View, Text, StyleSheet, Dimensions} from 'react-native';
+import {Entypo} from "@expo/vector-icons";
+
 import Logo from '../components/Logo';
 
-const ControlScreen = ({ navigation }) => {
+const ControlScreen = ({navigation}) => {
   const modules = [
-    { title: "AROMA", mode: "Disabled" },
-    { title: "AROMA", mode: "Lavender" },
-    { title: "SOUND", mode: "Rain Forest" }
+    {title: "AROMA", modes: ["Disabled", "Enabled"]},
+    {title: "AROMA", modes: ["Disabled", "Lavender"]},
+    {title: "SOUND", modes: ["Disabled", "Rain Forest", "Rainfall", "Breeze"]}
   ];
+  const [selectedValue, setSelectedValue] = useState("Disabled");
+
+  function toggleSwitch() {
+    setSwitchEnabled(previousState => !previousState);
+  }
+
   return (
     <View style={styles.mainContainer}>
       <TouchableOpacity
@@ -40,7 +47,17 @@ const ControlScreen = ({ navigation }) => {
               <View style={styles.circle} />
               <View style={styles.moduleContainerText}>
                 <Text>{module.title}</Text>
-                <Text>{module.mode}</Text>
+                <Picker
+                  selectedValue={selectedValue}
+                  style={{height: 30, width: 80}}
+                  onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                >
+                  {module['modes'].map((mode, j) => {
+                    return (
+                      <Picker.Item label={mode} value={mode} key={j} />
+                    );
+                  })}
+                </Picker>
               </View>
             </View>
           );
