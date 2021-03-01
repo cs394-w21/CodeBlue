@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
-import {Picker, Switch, TouchableOpacity, View, Text, StyleSheet, Dimensions} from 'react-native';
-import {Entypo} from "@expo/vector-icons";
+import React, { useState } from 'react';
+import { Picker, Switch, TouchableOpacity, View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Entypo } from "@expo/vector-icons";
+import ScrollPicker from 'react-native-wheel-scroll-picker';
 
 import Logo from '../components/Logo';
 
-const ControlScreen = ({navigation}) => {
+const ControlScreen = ({ navigation }) => {
   const modules = [
-    {title: "AROMA", modes: ["Disabled", "Enabled"]},
-    {title: "AROMA", modes: ["Disabled", "Lavender"]},
-    {title: "SOUND", modes: ["Disabled", "Rain Forest", "Rainfall", "Breeze"]}
+    { title: "AROMA", modes: ["Disabled", "Enabled"] },
+    { title: "AROMA", modes: ["Disabled", "Lavender"] },
+    { title: "SOUND", modes: ["Disabled", "Rain Forest", "Rainfall", "Breeze"] }
   ];
   const [selectedValue, setSelectedValue] = useState("Disabled");
 
@@ -37,6 +38,29 @@ const ControlScreen = ({navigation}) => {
           <View style={styles.moduleContainerText}>
             <Text>BEACON</Text>
             <Text>Emerald of Calmness</Text>
+            <ScrollPicker
+              dataSource={[
+                'a',
+                'b',
+                'c',
+                'd',
+              ]}
+              selectedIndex={1}
+              renderItem={(data, index, isSelected) => {
+                //
+              }}
+              onValueChange={(data, selectedIndex) => {
+                //
+              }}
+              wrapperHeight={180}
+              wrapperWidth={150}
+              wrapperBackground={'#FFFFFF'}
+              itemHeight={60}
+              highlightColor={'#d8d8d8'}
+              highlightBorderWidth={2}
+              activeItemColor={'#222121'}
+              itemColor={'#B4B4B4'}
+            />
           </View>
         </View>
         {modules.map((module, i) => {
@@ -49,7 +73,7 @@ const ControlScreen = ({navigation}) => {
                 <Text>{module.title}</Text>
                 <Picker
                   selectedValue={selectedValue}
-                  style={{height: 30, width: 80}}
+                  style={{ height: 30, width: 80 }}
                   onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                 >
                   {module['modes'].map((mode, j) => {

@@ -16,6 +16,7 @@
     "@react-navigation/stack": "^5.14.2",
     "expo": "~40.0.0",
     "expo-font": "~8.4.0",
+    "expo-linear-gradient": "~8.4.0",
     "expo-status-bar": "~1.0.3",
     "firebase": "^8.2.7",
     "formik": "^2.2.6",
@@ -31,6 +32,8 @@
     "react-native-switch-toggle": "^1.1.4",
     "react-native-vector-icons": "^8.0.0",
     "react-native-web": "~0.13.12",
+    "react-native-wheel-scroll-picker": "^0.2.4",
+    "styled-components": "^5.2.1",
     "toggle-switch-react-native": "^3.0.0",
     "yup": "^0.32.8"
   },
