@@ -1,24 +1,43 @@
 import React, { useState } from 'react';
-import { Picker, Switch, TouchableOpacity, View, Text, StyleSheet, Dimensions } from 'react-native';
+import {Switch, TouchableOpacity, View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Entypo } from "@expo/vector-icons";
-import ScrollPicker from 'react-native-wheel-scroll-picker';
 
 import Logo from '../components/Logo';
+import ModuleModal from '../components/ModuleModal';
 
 const ControlScreen = ({ navigation }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  
   const modules = [
     { title: "AROMA", modes: ["Disabled", "Enabled"] },
     { title: "AROMA", modes: ["Disabled", "Lavender"] },
     { title: "SOUND", modes: ["Disabled", "Rain Forest", "Rainfall", "Breeze"] }
   ];
-  const [selectedValue, setSelectedValue] = useState("Disabled");
-
-  function toggleSwitch() {
-    setSwitchEnabled(previousState => !previousState);
+  const [selectedValue, setSelectedValue] = useState("Disabled"); 
+  const [selectedModule, setSelectedModule] = useState(modules[2]);
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
   }
 
+  const handlePress = (module) => {
+    if (module.length == 2)
+    {
+      
+    }
+    else {
+      setModalVisible(true);
+      setSelectedModule(module);
+    }
+  }
+
+  const beaconColors = ['green', 'red', 'blue'];
+
+  const beaconTitle = 'beacon';
+
   return (
+    
     <View style={styles.mainContainer}>
+      <ModuleModal isVisible={modalVisible} toggleModal={toggleModal} modules={modules}/>
       <TouchableOpacity
         style={styles.homeButton}
         onPress={() =>
@@ -32,56 +51,24 @@ const ControlScreen = ({ navigation }) => {
       <Text style={styles.topText}>Tap on a module to adjust it</Text>
       <View style={styles.container}>
         <View style={styles.moduleContainer}>
-          <View style={styles.topHardwareComponent} />
+          <TouchableOpacity style={styles.topHardwareComponent} onPress={() => handlePress({beaconTitle, beaconColors})}/>
           <View style={styles.lineTop} />
           <View style={styles.topCircle} />
           <View style={styles.moduleContainerText}>
             <Text>BEACON</Text>
             <Text>Emerald of Calmness</Text>
-            <ScrollPicker
-              dataSource={[
-                'a',
-                'b',
-                'c',
-                'd',
-              ]}
-              selectedIndex={1}
-              renderItem={(data, index, isSelected) => {
-                //
-              }}
-              onValueChange={(data, selectedIndex) => {
-                //
-              }}
-              wrapperHeight={180}
-              wrapperWidth={150}
-              wrapperBackground={'#FFFFFF'}
-              itemHeight={60}
-              highlightColor={'#d8d8d8'}
-              highlightBorderWidth={2}
-              activeItemColor={'#222121'}
-              itemColor={'#B4B4B4'}
-            />
           </View>
         </View>
         {modules.map((module, i) => {
+          const title = module.title;
+          const mode = module.mode;
           return (
             <View key={i} style={styles.moduleContainer}>
-              <View style={styles.hardwareComponent} />
+              <TouchableOpacity style={styles.hardwareComponent} onPress={() => handlePress({title, mode})}/>
               <View style={styles.line} />
               <View style={styles.circle} />
               <View style={styles.moduleContainerText}>
                 <Text>{module.title}</Text>
-                <Picker
-                  selectedValue={selectedValue}
-                  style={{ height: 30, width: 80 }}
-                  onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                >
-                  {module['modes'].map((mode, j) => {
-                    return (
-                      <Picker.Item label={mode} value={mode} key={j} />
-                    );
-                  })}
-                </Picker>
               </View>
             </View>
           );
