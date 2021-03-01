@@ -5,8 +5,9 @@ import { Entypo } from "@expo/vector-icons";
 import Logo from '../components/Logo';
 import ModuleModal from '../components/ModuleModal';
 
-const ControlScreen = ({ navigation }) => {
+const ControlScreen = ({route, navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const {color} = route.params;
   
   const modules = [
     { title: "AROMA", modes: ["Disabled", "Enabled"] },
@@ -19,25 +20,26 @@ const ControlScreen = ({ navigation }) => {
     setModalVisible(!modalVisible);
   }
 
-  const handlePress = (module) => {
-    if (module.length == 2)
+  const handlePress = ({title, modes}) => {
+    if (modes.length == 2)
     {
       
     }
-    else {
+    else 
+    {
       setModalVisible(true);
-      setSelectedModule(module);
+      setSelectedModule({title, modes});
     }
   }
 
-  const beaconColors = ['green', 'red', 'blue'];
+  const modes = ['green', 'red', 'blue'];
 
-  const beaconTitle = 'beacon';
+  const title = 'beacon';
 
   return (
     
     <View style={styles.mainContainer}>
-      <ModuleModal isVisible={modalVisible} toggleModal={toggleModal} modules={modules}/>
+      <ModuleModal isVisible={modalVisible} toggleModal={toggleModal} module={selectedModule}/>
       <TouchableOpacity
         style={styles.homeButton}
         onPress={() =>
@@ -48,33 +50,34 @@ const ControlScreen = ({ navigation }) => {
           color="black" />
       </TouchableOpacity>
       <Logo />
-      <Text style={styles.topText}>Tap on a module to adjust it</Text>
-      <View style={styles.container}>
-        <View style={styles.moduleContainer}>
-          <TouchableOpacity style={styles.topHardwareComponent} onPress={() => handlePress({beaconTitle, beaconColors})}/>
-          <View style={styles.lineTop} />
-          <View style={styles.topCircle} />
-          <View style={styles.moduleContainerText}>
-            <Text>BEACON</Text>
-            <Text>Emerald of Calmness</Text>
-          </View>
-        </View>
-        {modules.map((module, i) => {
-          const title = module.title;
-          const mode = module.mode;
-          return (
-            <View key={i} style={styles.moduleContainer}>
-              <TouchableOpacity style={styles.hardwareComponent} onPress={() => handlePress({title, mode})}/>
-              <View style={styles.line} />
-              <View style={styles.circle} />
-              <View style={styles.moduleContainerText}>
-                <Text>{module.title}</Text>
-              </View>
+      <View style={styles.content}>
+        <Text style={styles.topText}>Tap on a module to adjust it</Text>
+        <View style={styles.container}>
+          <View style={styles.moduleContainer}>
+            <TouchableOpacity style={[styles.topHardwareComponent, {backgroundColor: `${color}`}]} onPress={() => handlePress({title, modes})}/>
+            <View style={styles.lineTop} />
+            <View style={styles.topCircle} />
+            <View style={styles.moduleContainerText}>
+              <Text>BEACON</Text>
             </View>
-          );
-        })}
-        <View style={styles.verticalRect} />
-        <View style={styles.horizontalRect} />
+          </View>
+          {modules.map((module, i) => {
+            const title = module.title;
+            const modes = module.modes;
+            return (
+              <View key={i} style={styles.moduleContainer}>
+                <TouchableOpacity style={[styles.hardwareComponent, , {backgroundColor: `${color}`}]} onPress={() => handlePress({title, modes})}/>
+                <View style={styles.line} />
+                <View style={styles.circle} />
+                <View style={styles.moduleContainerText}>
+                  <Text>{module.title}</Text>
+                </View>
+              </View>
+            );
+          })}
+          <View style={[styles.verticalRect, {backgroundColor: `${color}`}]} />
+          <View style={[styles.horizontalRect, {backgroundColor: `${color}`}]} />
+        </View>
       </View>
     </View>
   );
@@ -130,6 +133,11 @@ const styles = StyleSheet.create({
     color: "grey"
 
   },
+  // content: {
+  //   borderColor: 'black',
+  //   borderWidth: 2,
+  //   height: '100%'
+  // },
   container: {
     flex: 1,
     flexDirection: 'column',
@@ -176,7 +184,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 140,
     backgroundColor: '#21518C'
-  }
+  },
 })
 
 export default ControlScreen;

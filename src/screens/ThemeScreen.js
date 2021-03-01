@@ -65,8 +65,8 @@ const ThemeScreen = ({ navigation }) => {
   const createNewTheme = () => {
     navigation.navigate('CreateThemeScreen');
   }
-  const navigateTheme = () => {
-    navigation.navigate('ControlScreen');
+  const navigateTheme = (color) => {
+    navigation.navigate('ControlScreen', {color: color});
     setModalVisible(false);
   }
 

@@ -19,7 +19,7 @@ const ThemeModal = ({ theme, navigation, isVisible, toggleModal, navigateTheme }
         style={styles.gradient}>
         <Text style={styles.themeTitle}>{theme.title}</Text>
         <TouchableOpacity
-          onPress={navigateTheme}
+          onPress={() => navigateTheme(theme.color)}
           style={styles.button}
         >
           <Text>Select</Text>

@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Raleway_800ExtraBold',
     fontSize: 30,
     color: '#21518c',
-    marginBottom: 20
+    marginBottom: 20,
   }
 });
 

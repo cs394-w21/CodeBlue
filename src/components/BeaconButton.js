@@ -10,7 +10,7 @@ const BeaconButton = ({ navigation }) => {
     <View style={styles.settings}>
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate('ControlScreen')}>
+          navigation.navigate('ControlScreen', {color: '#21518C'})}>
         <MaterialCommunityIcons
           name="lighthouse"
           size={40}
