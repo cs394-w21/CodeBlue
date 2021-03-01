@@ -4,16 +4,17 @@ import 'react-native-gesture-handler';
 import BeaconButton from '../components/BeaconButton';
 import {useFonts, Raleway_800ExtraBold} from '@expo-google-fonts/raleway';
 
-import CreateThemeScreen from './CreateThemeScreen';
 import firebase from '../firebase';
 import UserContext from '../../UserContext';
-import Logo from '../components/Logo'
+import Logo from '../components/Logo';
+import ThemeModal from '../components/ThemeModal';
 
 let font = 'sans-serif';
 
 const db = firebase.database().ref();
 
 const ThemeScreen = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const user = useContext(UserContext);
   const [fontsLoaded] = useFonts({
     Raleway_800ExtraBold
@@ -41,18 +42,36 @@ const ThemeScreen = ({navigation}) => {
     {title: "empowered", color: "#9242b7"},
     {title: "romantic", color: "#da3a7d"}];
 
+  const [selectedTheme, setSelectedTheme] = useState(themeList[0]);
+
   if (fontsLoaded) {
     font = 'Raleway_800ExtraBold'
   }
-  const handlePress = () => {
-    navigation.navigate('ControlScreen');
+
+  /**
+   * open and close modal
+   */
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  }
+
+  /**
+   * navigation functions for other screens
+   */
+  const handlePress = (theme) => {
+    setModalVisible(true);
+    setSelectedTheme(theme);
   }
   const createNewTheme = () => {
     navigation.navigate('CreateThemeScreen');
   }
+
+  /**
+   * Item for displaying themes 
+   */
   const Item = ({title, color}) => (
     <TouchableOpacity
-      onPress={handlePress}
+      onPress={() => handlePress({title, color})}
       style={[styles.item, {backgroundColor: `${color}`, width: windowWidth * 0.45}]}
     >
       <Text style={styles.buttonText}>{title}</Text>
@@ -63,6 +82,7 @@ const ThemeScreen = ({navigation}) => {
   );
   return (
     <View>
+      <ThemeModal isVisible={modalVisible} theme={selectedTheme} toggleModal={toggleModal}/>
       <BeaconButton navigation={navigation} />
       <SafeAreaView style={styles.container}>
         <Logo />
