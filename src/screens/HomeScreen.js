@@ -6,7 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { enableScreens } from "react-native-screens";
-import { Entypo } from "@expo/vector-icons";
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { BookOpen } from "react-native-feather";
 
 import ThemeScreen from './ThemeScreen';
 import ControlScreen from './ControlScreen';
@@ -35,7 +36,7 @@ const HomeScreen = ({ navigation }) => {
         options={({ navigation }) => ({
           title: "Themes",
           tabBarIcon: () => (
-            <Entypo name="images" size={20} color="black" />
+            <FontAwesome5 name={'user-cog'} size={20} solid />
           ),
         })}
       />
@@ -46,7 +47,7 @@ const HomeScreen = ({ navigation }) => {
         options={({ navigation }) => ({
           title: "Journal",
           tabBarIcon: () => (
-            <Entypo name="images" size={20} color="black" />
+            <BookOpen width={23} height={23} />
           ),
         })}
       />
