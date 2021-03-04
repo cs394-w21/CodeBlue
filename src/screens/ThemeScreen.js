@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { ScrollView, SafeAreaView, Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import React, {createContext, useContext, useState, useEffect} from 'react';
+import {ScrollView, SafeAreaView, Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
 import 'react-native-gesture-handler';
 import BeaconButton from '../components/BeaconButton';
-import { useFonts, Raleway_800ExtraBold } from '@expo-google-fonts/raleway';
+import {useFonts, Raleway_800ExtraBold} from '@expo-google-fonts/raleway';
 
 import firebase from '../firebase';
 import UserContext from '../../UserContext';
@@ -13,7 +13,7 @@ let font = 'sans-serif';
 
 const db = firebase.database().ref();
 
-const ThemeScreen = ({ navigation }) => {
+const ThemeScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const user = useContext(UserContext);
   const [fontsLoaded] = useFonts({
@@ -31,16 +31,16 @@ const ThemeScreen = ({ navigation }) => {
   }, []);
 
   const themeList =
-    [{ title: "excited", color: "#ce51c6" },
-    { title: "chill", color: "#72b583" },
-    { title: "happy", color: "#eac752" },
-    { title: "focused", color: "#569ac5" },
-    { title: "calm", color: "#72bbe2" },
-    { title: "relaxed", color: "#c59cd6" },
-    { title: "motivated", color: "#64b6b3" },
-    { title: "energized", color: "#e2a862" },
-    { title: "empowered", color: "#9242b7" },
-    { title: "romantic", color: "#da3a7d" }];
+    [{title: "excited", color: "#ce51c6"},
+    {title: "chill", color: "#72b583"},
+    {title: "happy", color: "#eac752"},
+    {title: "focused", color: "#569ac5"},
+    {title: "calm", color: "#72bbe2"},
+    {title: "relaxed", color: "#c59cd6"},
+    {title: "motivated", color: "#64b6b3"},
+    {title: "energized", color: "#e2a862"},
+    {title: "empowered", color: "#9242b7"},
+    {title: "romantic", color: "#da3a7d"}];
 
   const [selectedTheme, setSelectedTheme] = useState(themeList[0]);
 
@@ -73,19 +73,19 @@ const ThemeScreen = ({ navigation }) => {
   /**
    * Item for displaying themes 
    */
-  const Item = ({ title, color }) => (
+  const Item = ({title, color}) => (
     <TouchableOpacity
-      onPress={() => handlePress({ title, color })}
-      style={[styles.item, { backgroundColor: `${color}`, width: windowWidth * 0.45 }]}
+      onPress={() => handlePress({title, color})}
+      style={[styles.item, {backgroundColor: `${color}`, width: windowWidth * 0.45}]}
     >
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity >
   );
-  const renderItem = ({ item }) => (
+  const renderItem = ({item}) => (
     <Item title={item.title} color={item.color} />
   );
   return (
-    <View>
+    <ScrollView>
       <ThemeModal isVisible={modalVisible} theme={selectedTheme} toggleModal={toggleModal} navigateTheme={navigateTheme} />
       <BeaconButton navigation={navigation} />
       <SafeAreaView style={styles.container}>
@@ -104,7 +104,7 @@ const ThemeScreen = ({ navigation }) => {
       <TouchableOpacity
         onpress={createNewTheme}
       />
-    </View>
+    </ScrollView>
   )
 
 };
