@@ -24,12 +24,7 @@ const ThemeModal = ({ theme, navigation, isVisible, toggleModal, navigateTheme }
         >
           <Text>Select</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity
-          onPress={toggleModal}
-          style={styles.button}
-        >
-          <Text>Close</Text>
-        </TouchableOpacity> */}
+
       </LinearGradient>
 
     </Modal>

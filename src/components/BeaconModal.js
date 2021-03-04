@@ -2,7 +2,12 @@ import React from 'react';
 import { View, FlatList, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Modal from 'modal-enhanced-react-native-web';
 
-const ModuleModal = ({ isVisible, toggleModal, module }) => {
+const BeaconModal = ({ isVisible, toggleModal, colors, setSelectedColor }) => {
+    const handlePress = (i) => {
+        setSelectedColor(colors[i])
+        toggleModal()
+    }
+
     return (
         <Modal
             isVisible={isVisible}
@@ -10,15 +15,17 @@ const ModuleModal = ({ isVisible, toggleModal, module }) => {
             swipeDirection="left"
             onSwipe={toggleModal}
         >
+
             <TouchableOpacity style={styles.blank} onPress={toggleModal}></TouchableOpacity>
             <View style={styles.modeBoxes}>
-                {module.modes.map((mode, i) => {
-                    return (
-                        <TouchableOpacity key={i} style={styles.item} onPress={toggleModal}>
-                            <Text style={styles.itemText}>{mode}</Text>
-                        </TouchableOpacity>
-                    );
-                })}
+                <Text style={styles.textStyle}>Pick a Beacon Color:</Text>
+                <View style={styles.modeBoxesRow}>
+                    {colors.map((color, i) => {
+                        return (
+                            <TouchableOpacity key={i} onPress={() => handlePress(i)} style={[styles.item, { backgroundColor: `${color}` }]} />
+                        );
+                    })}
+                </View>
             </View>
         </Modal>
     );
@@ -37,9 +44,9 @@ const styles = StyleSheet.create({
     item: {
         backgroundColor: '#21518C',
         height: 40,
-        width: 110,
+        width: 40,
         justifyContent: 'center',
-        margin: 10,
+        margin: 15,
         borderRadius: 3,
         textAlign: 'center',
     },
@@ -47,11 +54,20 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         height: '30%',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+    },
+    modeBoxesRow: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
     },
     blank: {
         height: '70%'
+    },
+    textStyle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10,
     }
 })
 
-export default ModuleModal;
+export default BeaconModal;

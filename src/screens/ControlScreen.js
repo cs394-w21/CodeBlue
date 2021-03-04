@@ -1,45 +1,69 @@
 import React, { useState } from 'react';
-import {Switch, TouchableOpacity, View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Switch, TouchableOpacity, View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Entypo } from "@expo/vector-icons";
 
 import Logo from '../components/Logo';
 import ModuleModal from '../components/ModuleModal';
+import BeaconModal from '../components/BeaconModal';
 
-const ControlScreen = ({route, navigation }) => {
+
+const ControlScreen = ({ route, navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const {color} = route.params;
-  
+  const [modalVisibleBeacon, setModalVisibleBeacon] = useState(false);
+  const { color } = route.params;
+
+  const modes = ['#ce51c6', '#72b583', '#eac752', '#569ac5', '#72bbe2', '#c59cd6', '#64b6b3', '#e2a862', '#9242b7', '#da3a7d'];
+
+
+  [{ title: "excited", color: "#ce51c6" },
+  { title: "chill", color: "#72b583" },
+  { title: "happy", color: "#eac752" },
+  { title: "focused", color: "#569ac5" },
+  { title: "calm", color: "#72bbe2" },
+  { title: "relaxed", color: "#c59cd6" },
+  { title: "motivated", color: "#64b6b3" },
+  { title: "energized", color: "#e2a862" },
+  { title: "empowered", color: "#9242b7" },
+  { title: "romantic", color: "#da3a7d" }];
+
   const modules = [
     { title: "AROMA", modes: ["Disabled", "Enabled"] },
     { title: "AROMA", modes: ["Disabled", "Lavender"] },
     { title: "SOUND", modes: ["Disabled", "Rain Forest", "Rainfall", "Breeze"] }
   ];
-  const [selectedValue, setSelectedValue] = useState("Disabled"); 
+  const [selectedValue, setSelectedValue] = useState("Disabled");
   const [selectedModule, setSelectedModule] = useState(modules[2]);
+  const [selectedColor, setSelectedColor] = useState(color);
+
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   }
-
-  const handlePress = ({title, modes}) => {
-    if (modes.length == 2)
-    {
-      
-    }
-    else 
-    {
-      setModalVisible(true);
-      setSelectedModule({title, modes});
-    }
+  const toggleModalBeacon = () => {
+    setModalVisibleBeacon(!modalVisibleBeacon);
   }
 
-  const modes = ['green', 'red', 'blue'];
+  const handlePress = ({ title, modes }) => {
+    if (modes.length == 2) {
+
+    }
+    else {
+      setModalVisible(true);
+      setSelectedModule({ title, modes });
+    }
+  }
+  const handlePressBeacon = ({ title, modes }) => {
+    setModalVisibleBeacon(true);
+  }
+
+
 
   const title = 'beacon';
 
   return (
-    
+
     <View style={styles.mainContainer}>
-      <ModuleModal isVisible={modalVisible} toggleModal={toggleModal} module={selectedModule}/>
+      <ModuleModal isVisible={modalVisible} toggleModal={toggleModal} module={selectedModule} />
+      <BeaconModal isVisible={modalVisibleBeacon} toggleModal={toggleModalBeacon} colors={modes} setSelectedColor={setSelectedColor} />
       <TouchableOpacity
         style={styles.homeButton}
         onPress={() =>
@@ -54,7 +78,7 @@ const ControlScreen = ({route, navigation }) => {
         <Text style={styles.topText}>Tap on a module to adjust it</Text>
         <View style={styles.container}>
           <View style={styles.moduleContainer}>
-            <TouchableOpacity style={[styles.topHardwareComponent, {backgroundColor: `${color}`}]} onPress={() => handlePress({title, modes})}/>
+            <TouchableOpacity style={[styles.topHardwareComponent, { backgroundColor: `${selectedColor}` }]} onPress={() => handlePressBeacon({ title, modes })} />
             <View style={styles.lineTop} />
             <View style={styles.topCircle} />
             <View style={styles.moduleContainerText}>
@@ -66,7 +90,7 @@ const ControlScreen = ({route, navigation }) => {
             const modes = module.modes;
             return (
               <View key={i} style={styles.moduleContainer}>
-                <TouchableOpacity style={[styles.hardwareComponent, , {backgroundColor: `${color}`}]} onPress={() => handlePress({title, modes})}/>
+                <TouchableOpacity style={[styles.hardwareComponent, , { backgroundColor: `${selectedColor}` }]} onPress={() => handlePress({ title, modes })} />
                 <View style={styles.line} />
                 <View style={styles.circle} />
                 <View style={styles.moduleContainerText}>
@@ -75,8 +99,8 @@ const ControlScreen = ({route, navigation }) => {
               </View>
             );
           })}
-          <View style={[styles.verticalRect, {backgroundColor: `${color}`}]} />
-          <View style={[styles.horizontalRect, {backgroundColor: `${color}`}]} />
+          <View style={[styles.verticalRect, { backgroundColor: `${selectedColor}` }]} />
+          <View style={[styles.horizontalRect, { backgroundColor: `${selectedColor}` }]} />
         </View>
       </View>
     </View>
