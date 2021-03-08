@@ -1,37 +1,38 @@
-import React, {useState} from 'react';
-import {Switch, TouchableOpacity, View, Text, StyleSheet, Dimensions} from 'react-native';
-import {Entypo} from "@expo/vector-icons";
+import React, { useState } from 'react';
+import { Switch, TouchableOpacity, View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Entypo } from "@expo/vector-icons";
 
 import Logo from '../components/Logo';
 import ModuleModal from '../components/ModuleModal';
 import BeaconModal from '../components/BeaconModal';
+import { withSafeAreaInsets } from 'react-native-safe-area-context';
 
 
-const ControlScreen = ({route, navigation}) => {
+const ControlScreen = ({ route, navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisibleBeacon, setModalVisibleBeacon] = useState(false);
-  const {color} = route.params;
+  const { color } = route.params;
 
   const modes = ['#ce51c6', '#72b583', '#eac752', '#569ac5', '#72bbe2', '#c59cd6', '#64b6b3', '#e2a862', '#9242b7', '#da3a7d'];
 
 
-  [{title: "excited", color: "#ce51c6"},
-  {title: "chill", color: "#72b583"},
-  {title: "happy", color: "#eac752"},
-  {title: "focused", color: "#569ac5"},
-  {title: "calm", color: "#72bbe2"},
-  {title: "relaxed", color: "#c59cd6"},
-  {title: "motivated", color: "#64b6b3"},
-  {title: "energized", color: "#e2a862"},
-  {title: "empowered", color: "#9242b7"},
-  {title: "romantic", color: "#da3a7d"}];
+  [{ title: "excited", color: "#ce51c6" },
+  { title: "chill", color: "#72b583" },
+  { title: "happy", color: "#eac752" },
+  { title: "focused", color: "#569ac5" },
+  { title: "calm", color: "#72bbe2" },
+  { title: "relaxed", color: "#c59cd6" },
+  { title: "motivated", color: "#64b6b3" },
+  { title: "energized", color: "#e2a862" },
+  { title: "empowered", color: "#9242b7" },
+  { title: "romantic", color: "#da3a7d" }];
 
   const modules = [
-    {title: "AROMA", modes: ["Disabled", "Enabled"]},
-    {title: "AROMA", modes: ["Disabled", "Lavender"]},
-    {title: "SOUND", modes: ["Disabled", "Rain Forest", "Rainfall", "Breeze"]}
+    { title: "AROMA 1", modes: ["Disabled", "Enabled"] },
+    { title: "AROMA 2", modes: ["Disabled", "Enabled"] },
+    { title: "SOUND", modes: ["Disabled", "Rain Forest", "Rainfall", "Breeze"] }
   ];
-  const [selectedValue, setSelectedValue] = useState("Disabled");
+  const [selectedValues, setSelectedValues] = useState(["Disabled", "Disabled", "Disabled"]);
   const [selectedModule, setSelectedModule] = useState(modules[2]);
   const [selectedColor, setSelectedColor] = useState(color);
 
@@ -42,16 +43,25 @@ const ControlScreen = ({route, navigation}) => {
     setModalVisibleBeacon(!modalVisibleBeacon);
   }
 
-  const handlePress = ({title, modes}) => {
+  const handlePress = ({ title, modes, i }) => {
     if (modes.length == 2) {
-
+      var temp = selectedValues
+      if (selectedValues[i] == "Disabled") {
+        temp[i] = "Enabled"
+      }
+      else {
+        temp[i] = "Disabled"
+      }
+      setSelectedValues([...temp]);
     }
     else {
       setModalVisible(true);
-      setSelectedModule({title, modes});
+      setSelectedModule({ title, modes });
     }
   }
-  const handlePressBeacon = ({title, modes}) => {
+
+
+  const handlePressBeacon = ({ title, modes }) => {
     setModalVisibleBeacon(true);
   }
 
@@ -62,7 +72,7 @@ const ControlScreen = ({route, navigation}) => {
   return (
 
     <View style={styles.mainContainer}>
-      <ModuleModal isVisible={modalVisible} toggleModal={toggleModal} module={selectedModule} />
+      <ModuleModal isVisible={modalVisible} toggleModal={toggleModal} module={selectedModule} selectedValues={selectedValues} setSelectedValues={setSelectedValues} />
       <BeaconModal isVisible={modalVisibleBeacon} toggleModal={toggleModalBeacon} colors={modes} setSelectedColor={setSelectedColor} />
       <TouchableOpacity
         style={styles.homeButton}
@@ -75,10 +85,9 @@ const ControlScreen = ({route, navigation}) => {
       </TouchableOpacity>
       <Logo />
       <View style={styles.content}>
-        <Text style={styles.topText}>Tap on a module to adjust it</Text>
         <View style={styles.container}>
           <View style={styles.moduleContainer}>
-            <TouchableOpacity style={[styles.topHardwareComponent, {backgroundColor: `${selectedColor}`}]} />
+            <TouchableOpacity style={[styles.topHardwareComponent, { backgroundColor: `${selectedColor}` }]} />
             <View style={styles.lineTop} />
             <View style={styles.topCircle} />
             <View style={styles.moduleContainerText}>
@@ -90,17 +99,36 @@ const ControlScreen = ({route, navigation}) => {
             const modes = module.modes;
             return (
               <View key={i} style={styles.moduleContainer}>
-                <TouchableOpacity style={[styles.hardwareComponent, {backgroundColor: `${selectedColor}`}]} />
+                <TouchableOpacity style={[styles.hardwareComponent, { backgroundColor: `${selectedColor}` }]} />
                 <View style={styles.line} />
                 <View style={styles.circle} />
                 <View style={styles.moduleContainerText}>
                   <Text>{module.title}</Text>
+                  <Text>{selectedValues[i]}</Text>
                 </View>
               </View>
             );
           })}
-          <View style={[styles.verticalRect, {backgroundColor: `${selectedColor}`}]} />
-          <View style={[styles.horizontalRect, {backgroundColor: `${selectedColor}`}]} />
+          <View style={[styles.verticalRect, { backgroundColor: `${selectedColor}` }]} />
+          <View style={[styles.horizontalRect, { backgroundColor: `${selectedColor}` }]} />
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.buttonStyle} onPress={() => handlePressBeacon({ title, modes })}>
+            <Text style={styles.buttonText}>LIGHT</Text>
+          </TouchableOpacity>
+          {modules.map((module, i) => {
+            const title = module.title;
+            const modes = module.modes;
+            return (
+              <View key={i} >
+                <TouchableOpacity style={styles.buttonStyle} onPress={() => handlePress({ title, modes, i })}>
+                  <Text style={styles.buttonText}>{module.title}</Text>
+                </TouchableOpacity>
+              </View>
+
+            );
+          })}
+
         </View>
       </View>
     </View>
@@ -108,6 +136,7 @@ const ControlScreen = ({route, navigation}) => {
 };
 
 const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 // put this in a constant ^^
 
 const boxHeight = 30;
@@ -117,6 +146,22 @@ const smallBoxHeight = 17.5;
 const styles = StyleSheet.create({
   homeButton: {
     alignItems: 'flex-end',
+  },
+  buttonStyle: {
+    width: windowWidth * .85,
+    height: windowHeight * .1,
+    backgroundColor: '#dbdbdb',
+    borderRadius: 5,
+    margin: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttonContainer: {
+    marginTop: 10,
+  },
+  buttonText: {
+    color: '#444',
+    fontSize: 15,
   },
   circle: {
     borderRadius: "50%",
@@ -137,7 +182,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     width: 100,
     height: boxHeight * .5,
-    marginLeft: -15,
+    marginLeft: -10,
     marginRight: 0,
     paddingRight: 0,
   },
@@ -146,7 +191,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     width: 100,
     height: smallBoxHeight * .5,
-    marginLeft: -15,
+    marginLeft: -10,
     marginRight: 0,
     paddingRight: 0,
   },

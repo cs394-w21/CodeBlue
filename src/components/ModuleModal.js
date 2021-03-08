@@ -2,7 +2,13 @@ import React from 'react';
 import { View, FlatList, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Modal from 'modal-enhanced-react-native-web';
 
-const ModuleModal = ({ isVisible, toggleModal, module }) => {
+const ModuleModal = ({ isVisible, toggleModal, module, selectedValues, setSelectedValues }) => {
+    const handlePress = (mode) => {
+        var temp = selectedValues
+        temp[2] = mode
+        setSelectedValues(temp)
+        toggleModal()
+    }
     return (
         <Modal
             isVisible={isVisible}
@@ -14,7 +20,7 @@ const ModuleModal = ({ isVisible, toggleModal, module }) => {
             <View style={styles.modeBoxes}>
                 {module.modes.map((mode, i) => {
                     return (
-                        <TouchableOpacity key={i} style={styles.item} onPress={toggleModal}>
+                        <TouchableOpacity key={i} style={styles.item} onPress={() => handlePress(mode)}>
                             <Text style={styles.itemText}>{mode}</Text>
                         </TouchableOpacity>
                     );
@@ -28,7 +34,7 @@ const ModuleModal = ({ isVisible, toggleModal, module }) => {
 
 const styles = StyleSheet.create({
     bottomModal: {
-        justifyContent: "flex-end",
+        justifyContent: "flex-start",
         margin: 0
     },
     itemText: {
