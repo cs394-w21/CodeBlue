@@ -97,6 +97,7 @@ const ThemeScreen = ({navigation}) => {
       <ThemeModal isVisible={modalVisible} theme={selectedTheme} toggleModal={toggleModal} navigateTheme={navigateTheme} />
       <BeaconButton navigation={navigation} />
       <SafeAreaView style={styles.container}>
+        <Logo />
         <View style={styles.userSection}>
           <View>
             <Text style={styles.textStyle}>Hi {user ? user.name : 'guest'},</Text>
