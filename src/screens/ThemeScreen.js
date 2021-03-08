@@ -103,8 +103,8 @@ const ThemeScreen = ({ navigation }) => {
             <Text style={styles.textStyle}>Hi {user ? user.name : 'guest'},</Text>
           </View>
           <View>
-            {user ? <Button title="Log out" uppercase={false} color="#21518C" onPress={handleSignout} />
-              : <Button title="sign in" uppercase={false} color="#21518C" onPress={handleSignin} />}
+            {user ? <Button title="Log out" color="#21518C" onPress={handleSignout} />
+              : <Button title="sign in" color="#21518C" onPress={handleSignin} />}
           </View>
         </View>
         <Text style={styles.textBold}>how would you like to feel?</Text>
