@@ -63,6 +63,7 @@ const ThemeScreen = ({ navigation }) => {
     setModalVisible(!modalVisible);
   }
 
+
   /**
    * navigation functions for other screens
    */
@@ -79,7 +80,7 @@ const ThemeScreen = ({ navigation }) => {
   }
 
   /**
-   * Item for displaying themes 
+   * Item for displaying themes
    */
   const Item = ({ title, color, description }) => (
     <TouchableOpacity

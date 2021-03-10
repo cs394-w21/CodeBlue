@@ -16,6 +16,7 @@ import JournalScreen from './JournalScreen';
 const Tab = createBottomTabNavigator();
 enableScreens();
 
+
 const HomeScreen = ({ navigation }) => {
   const [BeaconStatus, setBeaconStatus] = useState(true);
   const [switchOn, setSwitchOn] = useState(true);

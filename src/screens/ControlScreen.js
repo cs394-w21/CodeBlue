@@ -42,6 +42,7 @@ const ControlScreen = ({ route, navigation }) => {
   const toggleModalBeacon = () => {
     setModalVisibleBeacon(!modalVisibleBeacon);
   }
+  
 
   const handlePress = ({ title, modes, i }) => {
     if (modes.length == 2) {

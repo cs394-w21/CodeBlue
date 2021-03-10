@@ -12,6 +12,7 @@ const JournalScreen = ({ navigation }) => {
 
   const moodList = ['I am feeling...', 'energized', 'angry', 'stressed', 'relaxed', 'calm', 'excited', 'worried', 'motivated', 'focused', 'melancholic'];
 
+
   useEffect(() => {
     function handleResize() {
       setWindowWidth(Dimensions.get("window").width);
