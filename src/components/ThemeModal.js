@@ -27,7 +27,7 @@ const ThemeModal = ({theme, navigation, isVisible, toggleModal, navigateTheme}) 
           onPress={() => navigateTheme(theme.color)}
           style={styles.button}
         >
-          <Text>Select</Text>
+          <Text>Become {theme.title}</Text>
         </TouchableOpacity>
 
       </LinearGradient>
