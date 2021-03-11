@@ -9,6 +9,7 @@ const JournalScreen = ({ navigation }) => {
   const [windowWidth, setWindowWidth] = useState(Dimensions.get("window").width);
   const [windowHeight, setWindowHeight] = useState(Dimensions.get("window").height);
   const [mood, setMood] = useState('');
+  const [submittedTextVisible, setSubmittedTextVisible] = useState(false);
 
   const moodList = ['I am feeling...', 'energized', 'angry', 'stressed', 'relaxed', 'calm', 'excited', 'worried', 'motivated', 'focused', 'melancholic'];
 
@@ -30,6 +31,8 @@ const JournalScreen = ({ navigation }) => {
   }, []);
 
   function submitJournal() {
+    setSubmittedTextVisible(true);
+    setTimeout(() => setSubmittedTextVisible(false), 4000);
     return 0;
   }
 
@@ -53,7 +56,7 @@ const JournalScreen = ({ navigation }) => {
           })}
         </Picker>
         <TextInput
-          style={[styles.textInput, { width: windowWidth * .8, height: windowHeight * .65 }]}
+          style={[styles.textInput, { width: windowWidth * .8, height: windowHeight * .60 }]}
           onChangeText={text => onChangeText(text)}
           value={journalEntry}
           multiline={true}
@@ -62,6 +65,7 @@ const JournalScreen = ({ navigation }) => {
         <TouchableOpacity onPress={submitJournal} style={styles.submitBtn}>
           <Text style={styles.submitBtnText}>Submit</Text>
         </TouchableOpacity>
+        <Text>{submittedTextVisible ? "Thoughts Captured" : " "}</Text>
       </View>
     </View>
   )

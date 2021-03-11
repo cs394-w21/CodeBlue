@@ -42,7 +42,7 @@ const ThemeModal = ({theme, navigation, isVisible, toggleModal, navigateTheme}) 
           onPress={() => navigateTheme(theme.color)}
           style={styles.button}
         >
-          <Text>Become {theme.title}</Text>
+          <Text>{theme.buttonText}</Text>
         </TouchableOpacity>
 
       </ImageBackground>
