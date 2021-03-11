@@ -1,9 +1,21 @@
-import React from 'react';
-import {Text, TouchableOpacity, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, ImageBackground} from 'react-native';
 import Modal from 'modal-enhanced-react-native-web';
-import {LinearGradient} from 'expo-linear-gradient';
+import firebase from '../firebase';
 
 const ThemeModal = ({theme, navigation, isVisible, toggleModal, navigateTheme}) => {
+  const [imageUrl, setImageUrl] = useState(undefined);
+
+  useEffect(() => {
+    firebase.storage()
+      .ref('/' + theme.title + '.png')
+      .getDownloadURL()
+      .then((url) => {
+        setImageUrl(url);
+      })
+      .catch((e) => console.log(e));
+  }, [theme]);
+
   return (
     <Modal
       isVisible={isVisible}
@@ -11,18 +23,21 @@ const ThemeModal = ({theme, navigation, isVisible, toggleModal, navigateTheme}) 
       swipeDirection="left"
       onSwipe={toggleModal}
     >
-      <LinearGradient
+      <ImageBackground
         // Button Linear Gradient
-        colors={[`${theme.color}`, '#cccccc']}
-        style={styles.gradient}>
+        style={styles.imageBackground}
+        source={imageUrl}
+      >
         <TouchableOpacity
           onPress={toggleModal}
           style={styles.closeBtn}
         >
           <Text style={styles.closeX}>X</Text>
         </TouchableOpacity>
-        <Text style={styles.themeTitle}>{theme.title}</Text>
-        <Text style={styles.themeDescription}>{theme.description}</Text>
+        <View style={styles.textBox}>
+          <Text style={styles.themeTitle}>{theme.title}</Text>
+          <Text style={styles.themeDescription}>{theme.description}</Text>
+        </View>
         <TouchableOpacity
           onPress={() => navigateTheme(theme.color)}
           style={styles.button}
@@ -30,7 +45,7 @@ const ThemeModal = ({theme, navigation, isVisible, toggleModal, navigateTheme}) 
           <Text>Become {theme.title}</Text>
         </TouchableOpacity>
 
-      </LinearGradient>
+      </ImageBackground>
 
     </Modal >
   );
@@ -43,36 +58,47 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderColor: "rgba(0, 0, 0, 0.1)",
   },
-  gradient: {
-    height: '75%',
+  imageBackground: {
+    height: '100%',
     width: '100%',
-    alignItems: 'center'
+    alignItems: 'center',
+    resizeMode: 'cover'
   },
   themeTitle: {
     fontSize: 25,
     fontWeight: 'bold',
     margin: 5,
-    color: '#333333'
+    color: '#e5e4e2'
   },
   themeDescription: {
-    fontSize: 18,
     color: 'white',
+    fontSize: 18,
     margin: 20
   },
   button: {
-    backgroundColor: 'rgba(255,255,255, 0.3)',
+    backgroundColor: 'rgba(255,255,255, 0.6)',
     borderRadius: 10,
     padding: 10,
     borderColor: 'black',
     marginTop: 100
   },
   closeBtn: {
-    backgroundColor: "rgba(0,0,0,0.0)",
+    backgroundColor: "rgba(70,62,63,0.5)",
     alignSelf: "flex-end",
-    margin: 10
+    margin: 10,
+    borderRadius: '50%',
+    width: 20,
+    alignItems: 'center'
   },
   closeX: {
-    fontSize: 14
+    fontSize: 14,
+    color: 'white'
+  },
+  textBox: {
+    backgroundColor: "rgba(0,0,0,0.5)",
+    alignItems: 'center',
+    width: '90%',
+    borderRadius: '10%'
   }
 })
 
