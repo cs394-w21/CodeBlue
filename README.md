@@ -4,8 +4,9 @@ Application for controlling the mybeacon hardware.
 User can track current mood and explore pre-defined mood themes.
 
 ## Installing / Getting started
-
+You must have Node.js installed to install / run this application.
 ```shell
+npm install -g expo-cli
 npm install 
 expo start
 ```
