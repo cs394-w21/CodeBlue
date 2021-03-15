@@ -21,7 +21,7 @@ Copy and paste your Firebase API key into src/firebase.js
 ```shell
 git clone git@github.com:cs394-w21/mybeacon.git
 cd mybeacon/
-packagemanager install
+npm install
 ```
 
 ### Deploying / Publishing
