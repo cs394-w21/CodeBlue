@@ -1,5 +1,4 @@
 # mybeacon
-> Additional information or tagline
 
 Application for controlling the mybeacon hardware.
 User can track current mood and explore pre-defined mood themes.
