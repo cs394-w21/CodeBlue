@@ -4,7 +4,7 @@ import "firebase/database";
 import 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDDa_vSHp-ibrigfe8zlNtsq6s2s1SJXAg",
+  apiKey: {FIREBASE_API_KEY},// replace with your Firebase API key,
   authDomain: "blue-team-client-project.firebaseapp.com",
   databaseURL: "https://blue-team-client-project-default-rtdb.firebaseio.com",
   projectId: "blue-team-client-project",
