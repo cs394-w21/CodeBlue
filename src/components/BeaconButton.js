@@ -1,11 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-
-import ControlScreen from '../screens/ControlScreen';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 
-const BeaconButton = ({ navigation }) => {
+const BeaconButton = ({navigation}) => {
   return (
     <View style={styles.settings}>
       <TouchableOpacity

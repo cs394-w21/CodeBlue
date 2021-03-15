@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Picker, TextInput, Dimensions, TouchableOpacity } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Picker, StyleSheet, View, Text, TextInput, Dimensions, TouchableOpacity} from 'react-native';
 
 import BeaconButton from '../components/BeaconButton';
 import Logo from '../components/Logo';
 
-const JournalScreen = ({ navigation }) => {
+const JournalScreen = ({navigation}) => {
   const [journalEntry, onChangeText] = useState((''))
   const [windowWidth, setWindowWidth] = useState(Dimensions.get("window").width);
   const [windowHeight, setWindowHeight] = useState(Dimensions.get("window").height);
@@ -47,7 +47,7 @@ const JournalScreen = ({ navigation }) => {
         <Picker
           selectedValue={mood}
           style={styles.moodPicker}
-          onValueChange={(moodValue, moodIndex) => setMood(moodValue)}
+          onValueChange={(moodValue) => setMood(moodValue)}
         >
           {moodList.map((moodVal, i) => {
             return (
@@ -56,7 +56,7 @@ const JournalScreen = ({ navigation }) => {
           })}
         </Picker>
         <TextInput
-          style={[styles.textInput, { width: windowWidth * .8, height: windowHeight * .60 }]}
+          style={[styles.textInput, {width: windowWidth * .8, height: windowHeight * .60}]}
           onChangeText={text => onChangeText(text)}
           value={journalEntry}
           multiline={true}

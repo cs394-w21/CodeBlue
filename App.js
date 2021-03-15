@@ -1,5 +1,5 @@
-import React, {useContext, createContext, useState, useEffect} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import 'react-native-gesture-handler';
@@ -7,7 +7,6 @@ import 'react-native-gesture-handler';
 import SignUpScreen from './src/screens/SignUpScreen';
 import SignInScreen from './src/screens/SignInScreen';
 import HomeScreen from './src/screens/HomeScreen';
-import SettingsScreen from './src/screens/SettingsScreen';
 import firebase from './src/firebase';
 import UserContext from './UserContext';
 import ControlScreen from './src/screens/ControlScreen';
@@ -51,7 +50,6 @@ const App = () => {
           <Stack.Screen name="SignInScreen" component={SignInScreen} options={{headerShown: false}} />
           <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{title: 'Sign Up'}} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} options={({navigation}) => ({headerShown: false})} />
-          <Stack.Screen name="SettingsScreen" component={SettingsScreen} options={{headerShown: false}} />
           <Stack.Screen name="ControlScreen" component={ControlScreen} options={{headerShown: false}} />
         </Stack.Navigator>
 

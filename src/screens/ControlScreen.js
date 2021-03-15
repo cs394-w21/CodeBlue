@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Switch, TouchableOpacity, View, Text, StyleSheet, Dimensions} from 'react-native';
+import {TouchableOpacity, View, Text, StyleSheet, Dimensions} from 'react-native';
 import {Entypo} from "@expo/vector-icons";
 
 import Logo from '../components/Logo';
@@ -48,11 +48,9 @@ const ControlScreen = ({route, navigation}) => {
   }
 
 
-  const handlePressBeacon = ({title, modes}) => {
+  const handlePressBeacon = () => {
     setModalVisibleBeacon(true);
   }
-
-  //onPress={() => handlePressBeacon({title, modes})}
 
   const title = 'beacon';
 
@@ -82,8 +80,6 @@ const ControlScreen = ({route, navigation}) => {
             </View>
           </View>
           {modules.map((module, i) => {
-            const title = module.title;
-            const modes = module.modes;
             return (
               <View key={i} style={styles.moduleContainer}>
                 <TouchableOpacity style={[styles.hardwareComponent, {backgroundColor: `${selectedColor}`}]} />
@@ -124,7 +120,6 @@ const ControlScreen = ({route, navigation}) => {
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
-// put this in a constant ^^
 
 const boxHeight = 30;
 const boxWidth = 20;
@@ -191,11 +186,6 @@ const styles = StyleSheet.create({
     color: "grey"
 
   },
-  // content: {
-  //   borderColor: 'black',
-  //   borderWidth: 2,
-  //   height: '100%'
-  // },
   container: {
     flex: 1,
     flexDirection: 'column',

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
-import { Raleway_800ExtraBold } from '@expo-google-fonts/raleway';
+import {Text, StyleSheet} from 'react-native';
 
 const Logo = () => {
   return (

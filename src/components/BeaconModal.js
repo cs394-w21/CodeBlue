@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, FlatList, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Modal from 'modal-enhanced-react-native-web';
 
 const BeaconModal = ({isVisible, toggleModal, colors, setSelectedColor}) => {
