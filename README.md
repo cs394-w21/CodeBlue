@@ -38,5 +38,9 @@ firebase deploy
 - Issue tracker: https://github.com/cs394-w21/mybeacon/issues
 
 ## Bugs
-Current iteration is only supported on a modern web browser.
-Screen formatting and styling works best on an iphone X sized window.
+- Current iteration is only supported on a modern web browser.
+- Screen formatting and styling works best on an iphone X sized window.
+
+### Missing Features
+- ControlScreen is not updated properly when themes are selected on ThemeScreen
+
