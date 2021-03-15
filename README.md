@@ -34,10 +34,6 @@ firebase deploy
 
 ## Links
 
-Even though this information can be found inside the project on machine-readable
-format like in a .json file, it's good to include a summary of most useful
-links to humans using your project. You can include links like:
-
 - Repository: https://github.com/cs394-w21/mybeacon/
 - Issue tracker: https://github.com/cs394-w21/mybeacon/issues
 
